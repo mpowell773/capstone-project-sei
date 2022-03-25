@@ -63,7 +63,7 @@ The main focus of puzzles will be pushblocks and switched barriers. Enemies will
 
 On game load, the player starts in Room 1 and continues to the boss room to complete the dungeon.
 
-![DungeonOverview](/images/LoP-Dungeon-Overview.png)
+![DungeonOverview](./images/LoP-Dungeon-Overview.png)
 
 ![Room1](./images/LoP-Room1.png)
 
