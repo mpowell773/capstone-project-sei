@@ -65,15 +65,15 @@ On game load, the player starts in Room 1 and continues to the boss room to comp
 
 ![DungeonOverview](/images/LoP-Dungeon-Overview.png)
 
-![Room1](/images/LoP-Room1.png)
+![Room1](./images/LoP-Room1.png)
 
-![Room2](/images/LoP-Room2.png)
+![Room2](./images/LoP-Room2.png)
 
-![Room3](/images/LoP-Room3.png)
+![Room3](./images/LoP-Room3.png)
 
-![Room4](/images/LoP-Room4.png)
+![Room4](./images/LoP-Room4.png)
 
-![BossRoom](/images/LoP-Boss-Room.png)
+![BossRoom](./images/LoP-Boss-Room.png)
 
 ---
 
