@@ -26,7 +26,12 @@ class Dungeon:
        
         #dict of layouts 
         layout = {
-            'boundary': import_csv_layout('../levels/dungeon/dungeon_FloorBlock.csv')
+            'boundary': import_csv_layout('../levels/dungeon/dungeon_FloorBlock.csv'),
+            'walls': import_csv_layout('../levels/dungeon/dungeon_Walls.csv'),
+            'detail': import_csv_layout('../levels/dungeon/dungeon_Detail.csv'),
+            'crates': import_csv_layout('../levels/dungeon/dungeon_Crates.csv'),
+            'chests': import_csv_layout('../levels/dungeon/dungeon_Chests.csv'),
+            'objects': import_csv_layout('../levels/dungeon/dungeon_Objects.csv'),
         }
 
         #for loop to cycle through our layout dict
@@ -41,9 +46,12 @@ class Dungeon:
                         x = column_index * TILESIZE
                         y = row_index * TILESIZE
                 
-                        #checking what key in dict is and then assigning the sprite to the mapped layout
+                        #checking what key in dict is and then assigning the sprite to the mapped layout, in this case, boundary
                         if style == 'boundary':
-                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'invisible')
+                            Tile((x,y), [self.obstacle_sprites], 'invisible')
+
+                        if style == 'walls':
+                            Tile((x,y), [self.visible_sprites], 'walls')
                 
         #         #if 'x' map Tile sprite to visible_sprites group in proper position
         #         if column == 'x':
@@ -78,7 +86,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 
 
         #create floor
-        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor.png').convert()
+        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor_no_walls.png').convert()
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
 
 
