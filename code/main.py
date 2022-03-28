@@ -11,8 +11,8 @@ class Game:
 
         pygame.init()
         #screen changes size of game window (scaling due to tileset size)
-        self.screen = pygame.display.set_mode((WIDTH * 4, HEIGHT * 4))
-        self.native_screen = NATIVE_SCREEN
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        # self.native_screen = NATIVE_SCREEN
         #changes name of window
         pygame.display.set_caption('The Legend of Python')
         #initiate clock to control framerate
@@ -30,14 +30,14 @@ class Game:
                     sys.exit()
             
             
-            self.native_screen.fill('black')  
+            self.screen.fill('black')  
             
             #create instance of room in main game
             self.room.run()
 
             #scale up screen
-            self.scaled_screen = pygame.transform.scale(self.native_screen, self.screen.get_size())   
-            self.screen.blit(self.scaled_screen, (0,0))
+            # self.scaled_screen = pygame.transform.scale(self.native_screen, self.screen.get_size())   
+            # self.screen.blit(self.scaled_screen, (0,0))
             #draw updated elements
             pygame.display.update()
             #framerate ceiling

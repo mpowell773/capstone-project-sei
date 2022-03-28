@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)
 
         #get image for player and add rectangle to it
-        self.image = pygame.image.load('../assets/graphics/frames/lizard_m_idle_anim_f1.png').convert_alpha()
+        self.image = pygame.image.load('../assets/graphics/scaled_images/lizard_scaled.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = position)
 
         #movement variables
@@ -40,7 +40,9 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
 
     def move(self,speed):
+        # does the vector have length?
         if self.direction.magnitude() != 0:
+            #if so, set to one
             self.direction = self.direction.normalize()
 
         self.rect.x += (self.direction.x * speed)

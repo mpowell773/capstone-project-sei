@@ -1,10 +1,10 @@
 import pygame
 
 #Main Game Variables
-WIDTH = 320
-HEIGHT = 180
+WIDTH = 1280
+HEIGHT = 720
 FPS = 60
-TILESIZE = 16
+TILESIZE = 64
 NATIVE_SCREEN = pygame.Surface((WIDTH , HEIGHT))
 
 
