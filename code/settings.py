@@ -1,0 +1,5 @@
+#Main Game Variables
+WIDTH = 1280
+HEIGHT = 720
+FPS = 70
+TILESIZE = 64

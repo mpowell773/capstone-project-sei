@@ -1,4 +1,5 @@
 import pygame, sys
+from settings import *
 
 # class object to set up base game functionality such as running and exiting
 class Game:
@@ -6,7 +7,7 @@ class Game:
 
         pygame.init()
         #screen changes size of game window
-        self.screen = pygame.display.set_mode((1280, 720))
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
         #initiate clock to control framerate
         self.clock = pygame.time.Clock()
 
@@ -24,7 +25,8 @@ class Game:
             #draw updated elements
             pygame.display.update()
             #framerate ceiling
-            self.clock.tick(60)
+            self.clock.tick(FPS)
+
 
 if __name__ == '__main__':
     game = Game()
