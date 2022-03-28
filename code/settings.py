@@ -7,6 +7,7 @@ FPS = 60
 TILESIZE = 16
 NATIVE_SCREEN = pygame.Surface((WIDTH , HEIGHT))
 
+
 #Mapped Rooms
 ROOM_1 = [
     ['x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x','x'],
