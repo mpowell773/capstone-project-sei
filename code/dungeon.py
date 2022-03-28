@@ -22,6 +22,10 @@ class Dungeon:
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
+
+        layout = {
+            # 'boundary': import_csv_layout('../')
+        }
         #enumerating to get both row and index
         # for row_index, row in enumerate(ROOM_1):
         #     #enumerating individual row to get column and element within row
