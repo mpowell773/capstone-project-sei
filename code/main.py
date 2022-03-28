@@ -1,6 +1,6 @@
 import pygame, sys
 from settings import *
-from debug import debug
+
 
 #class object to set up base game functionality such as running and exiting
 class Game:
@@ -9,6 +9,8 @@ class Game:
         pygame.init()
         #screen changes size of game window
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+        #changes name of window
+        pygame.display.set_caption('The Legend of Python')
         #initiate clock to control framerate
         self.clock = pygame.time.Clock()
 
@@ -21,8 +23,7 @@ class Game:
                     pygame.quit()
                     sys.exit()
             
-            self.screen.fill('black')
-            debug('hamster')
+            self.screen.fill('black')      
             #draw updated elements
             pygame.display.update()
             #framerate ceiling
