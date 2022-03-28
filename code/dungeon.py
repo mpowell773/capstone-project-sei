@@ -37,9 +37,6 @@ class Dungeon:
                     #store player in variable to be targetable
                     self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites)
 
-
-                
-
     def run(self):
         # update/draw game
         self.visible_sprites.draw(self.display_surf)
