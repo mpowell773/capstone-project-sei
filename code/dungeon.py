@@ -39,7 +39,7 @@ class Dungeon:
 
     def run(self):
         # update/draw game
-        self.visible_sprites.custom_draw()
+        self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
         debug(self.player.direction)
 
@@ -49,15 +49,30 @@ class YSortCameraGroup(pygame.sprite.Group):
 
         #inherit sprite group init
         super().__init__()
+        
         #store main screen in variable
         self.display_surface = pygame.display.get_surface()
+        
+        #get center of screen by dividing half and storing respective values into variables
+        self.half_width = self.display_surface.get_size()[0] // 2
+        self.half_height = self.display_surface.get_size()[1] // 2
+       
+        #vector to move camera
+        self.offset = pygame.math.Vector2()
 
     #method to draw with our camera
-    def custom_draw(self):
+    def custom_draw(self, player):
+
+        #finding offset by getting center of player rect and subtracting respective value to half of screen
+        self.offset.x = player.rect.centerx - self.half_width
+        self.offset.y = player.rect.centery - self.half_height
+
         #for each sprite in group
         for sprite in self.sprites():
+            #subtract offset from sprite rect
+            offset_position = sprite.rect.topleft - self.offset
             #draw them on screen
-            self.display_surface.blit(sprite.image, sprite.rect)
+            self.display_surface.blit(sprite.image, offset_position)
 
 
 
