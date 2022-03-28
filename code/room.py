@@ -1,6 +1,7 @@
 import pygame
 from settings import *
 from tile import Tile
+from player import Player
 
 
 #class that displays sprites of current room and also handles their interactions
@@ -8,7 +9,7 @@ class Room:
     def __init__(self):
 
         #get display surface
-        self.display_surf = pygame.display.get_surface()
+        self.display_surf = NATIVE_SCREEN
 
         #sprite group settings
         self.visible_sprites = pygame.sprite.Group()
@@ -30,6 +31,8 @@ class Room:
                 #if 'x' map Tile sprite to visible_sprites group in proper position
                 if column == 'x':
                     Tile((x,y), [self.visible_sprites])
+                if column == 'p':
+                    Player((x,y), [self.visible_sprites])
 
 
                 
