@@ -60,12 +60,22 @@ class YSortCameraGroup(pygame.sprite.Group):
         #vector to move camera
         self.offset = pygame.math.Vector2()
 
+
+        #create floor
+        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/test_room_floor.png').convert()
+        self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
+
+
     #method to draw with our camera
     def custom_draw(self, player):
 
         #finding offset by getting center of player rect and subtracting respective value to half of screen
         self.offset.x = player.rect.centerx - self.half_width
         self.offset.y = player.rect.centery - self.half_height
+
+        #draw floor
+        offset_position_floor = self.floor_rect.topleft - self.offset
+        self.display_surface.blit(self.floor_surface, offset_position_floor)
 
         #for each sprite in group sort them by their y position
         for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
