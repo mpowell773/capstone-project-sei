@@ -1,6 +1,6 @@
 import pygame, sys
 from settings import *
-from room import Room
+from dungeon import Dungeon
 
 
 
@@ -18,7 +18,7 @@ class Game:
         #initiate clock to control framerate
         self.clock = pygame.time.Clock()
 
-        self.room = Room()
+        self.dungeon = Dungeon()
 
     def run(self):
         while True:
@@ -33,7 +33,7 @@ class Game:
             self.screen.fill('black')  
             
             #create instance of room in main game
-            self.room.run()
+            self.dungeon.run()
 
             #scale up screen
             # self.scaled_screen = pygame.transform.scale(self.native_screen, self.screen.get_size())   

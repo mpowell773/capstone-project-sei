@@ -7,7 +7,7 @@ from debug import debug
 
 
 #class that displays sprites of current room and also handles their interactions
-class Room:
+class Dungeon:
     def __init__(self):
 
         #get display surface
@@ -35,7 +35,7 @@ class Room:
                     Tile((x,y), [self.visible_sprites, self.obstacle_sprites])
                 if column == 'p':
                     #store player in variable to be targetable
-                    self.player = Player((x,y), [self.visible_sprites])
+                    self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites)
 
 
                 

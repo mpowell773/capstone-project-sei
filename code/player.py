@@ -2,7 +2,7 @@ import pygame
 from settings import *
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, groups):
+    def __init__(self, position, groups, obstacle_sprites):
         #need to inherit from sprite class via super
         super().__init__(groups)
 
@@ -13,6 +13,9 @@ class Player(pygame.sprite.Sprite):
         #movement variables
         self.direction = pygame.math.Vector2()
         self.speed = 5
+
+        #need obstacle_sprites to check for collisions
+        self.obstacle_sprites = obstacle_sprites
 
     def input(self):
         #storing input from player in keys
@@ -49,10 +52,7 @@ class Player(pygame.sprite.Sprite):
         # self.collision('horizontal')
         self.rect.y += (self.direction.y * speed) 
         # self.collision('vertical')
-		# self.rect.center += self.direction * speed
-
-    
-
+	
     def update(self):
         self.input()
         self.move(self.speed)
