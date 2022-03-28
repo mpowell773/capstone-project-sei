@@ -14,7 +14,7 @@ class Dungeon:
         self.display_surf = pygame.display.get_surface()
 
         #sprite group settings
-        self.visible_sprites = pygame.sprite.Group()
+        self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
 
         #run create_map method to display sprites
@@ -42,4 +42,12 @@ class Dungeon:
         self.visible_sprites.draw(self.display_surf)
         self.visible_sprites.update()
         debug(self.player.direction)
+
+#camera for game
+class YSortCameraGroup(pygame.sprite.Group):
+    def __init__(self):
+        #inherit sprite group init
+        super().__init__()
+
+
 

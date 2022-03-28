@@ -48,6 +48,7 @@ class Player(pygame.sprite.Sprite):
             #if so, set to one
             self.direction = self.direction.normalize()
 
+        #apply movement to rect and also check for collisions
         self.rect.x += (self.direction.x * speed)
         self.collision('horizontal')
         self.rect.y += (self.direction.y * speed) 
@@ -74,11 +75,6 @@ class Player(pygame.sprite.Sprite):
                         self.rect.bottom = sprite.rect.top
                     if self.direction.y < 0:
                         self.rect.top = sprite.rect.bottom
-
-
-
-        if direction == 'vertical':
-            pass
 	
     def update(self):
         self.input()
