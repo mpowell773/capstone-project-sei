@@ -1,5 +1,6 @@
 import pygame, sys
 from settings import *
+from room import Room
 
 
 #class object to set up base game functionality such as running and exiting
@@ -14,6 +15,8 @@ class Game:
         #initiate clock to control framerate
         self.clock = pygame.time.Clock()
 
+        self.room = Room()
+
     def run(self):
         while True:
             #user event loop
@@ -23,7 +26,9 @@ class Game:
                     pygame.quit()
                     sys.exit()
             
-            self.screen.fill('black')      
+            self.screen.fill('black')  
+            #create instance of room in main game
+            self.room.run()    
             #draw updated elements
             pygame.display.update()
             #framerate ceiling
