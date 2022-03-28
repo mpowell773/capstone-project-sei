@@ -35,9 +35,6 @@ class Game:
             #create instance of room in main game
             self.dungeon.run()
 
-            #scale up screen
-            # self.scaled_screen = pygame.transform.scale(self.native_screen, self.screen.get_size())   
-            # self.screen.blit(self.scaled_screen, (0,0))
             #draw updated elements
             pygame.display.update()
             #framerate ceiling

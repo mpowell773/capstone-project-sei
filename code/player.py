@@ -7,8 +7,16 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)
 
         #get image for player and add rectangle to it
-        self.image = pygame.image.load('../assets/graphics/scaled_images/lizard_scaled.png').convert_alpha()
+        self.image = pygame.image.load('../assets/graphics/utility_tiles/blocked_path.png').convert_alpha()
+        
         self.rect = self.image.get_rect(topleft = position)
+        print(self.rect)
+     
+
+
+
+        #reducing rect and returning new variable so that player image can overlap with obstacles
+        self.hitbox = self.rect.inflate(0, -26)
 
         #movement variables
         self.direction = pygame.math.Vector2()
@@ -49,32 +57,33 @@ class Player(pygame.sprite.Sprite):
             self.direction = self.direction.normalize()
 
         #apply movement to rect and also check for collisions
-        self.rect.x += (self.direction.x * speed)
+        self.hitbox.x += (self.direction.x * speed)
         self.collision('horizontal')
-        self.rect.y += (self.direction.y * speed) 
+        self.hitbox.y += (self.direction.y * speed) 
         self.collision('vertical')
+        self.rect.center = self.hitbox.center
     
     def collision(self, direction):
         if direction == 'horizontal':
             #check each sprite in obstacle sprite
             for sprite in self.obstacle_sprites:
                 #if collision becomes true
-                if sprite.rect.colliderect(self.rect):
+                if sprite.hitbox.colliderect(self.hitbox):
                     #and if direction is to the right
                     if self.direction.x > 0:
                         #keep player sprite right side same as obstacle left side
-                        self.rect.right = sprite.rect.left
+                        self.hitbox.right = sprite.hitbox.left
                     if self.direction.x < 0:
-                        self.rect.left = sprite.rect.right
+                        self.hitbox.left = sprite.hitbox.right
 
         #the following logic is the same as horizontal except applied to y axis
         if direction == 'vertical':
             for sprite in self.obstacle_sprites:
-                if sprite.rect.colliderect(self.rect):
+                if sprite.hitbox.colliderect(self.hitbox):
                     if self.direction.y > 0:
-                        self.rect.bottom = sprite.rect.top
+                        self.hitbox.bottom = sprite.hitbox.top
                     if self.direction.y < 0:
-                        self.rect.top = sprite.rect.bottom
+                        self.hitbox.top = sprite.hitbox.bottom
 	
     def update(self):
         self.input()
