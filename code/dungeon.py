@@ -23,19 +23,20 @@ class Dungeon:
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
         #enumerating to get both row and index
-        for row_index, row in enumerate(ROOM_1):
-            #enumerating individual row to get column and element within row
-            for column_index, column in enumerate(row):
-                #defining x,y position of each tile     
-                x = column_index * TILESIZE
-                y = row_index * TILESIZE
+        # for row_index, row in enumerate(ROOM_1):
+        #     #enumerating individual row to get column and element within row
+        #     for column_index, column in enumerate(row):
+        #         #defining x,y position of each tile     
+        #         x = column_index * TILESIZE
+        #         y = row_index * TILESIZE
                 
-                #if 'x' map Tile sprite to visible_sprites group in proper position
-                if column == 'x':
-                    Tile((x,y), [self.visible_sprites, self.obstacle_sprites])
-                if column == 'p':
-                    #store player in variable to be targetable
-                    self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites)
+        #         #if 'x' map Tile sprite to visible_sprites group in proper position
+        #         if column == 'x':
+        #             Tile((x,y), [self.visible_sprites, self.obstacle_sprites])
+        #         if column == 'p':
+        #             #store player in variable to be targetable
+        #             self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites)
+        self.player = Player((1600, 3000), [self.visible_sprites], self.obstacle_sprites)
 
     def run(self):
         # update/draw game
