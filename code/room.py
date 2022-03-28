@@ -2,6 +2,8 @@ import pygame
 from settings import *
 from tile import Tile
 from player import Player
+from debug import debug
+
 
 
 #class that displays sprites of current room and also handles their interactions
@@ -30,9 +32,10 @@ class Room:
                 
                 #if 'x' map Tile sprite to visible_sprites group in proper position
                 if column == 'x':
-                    Tile((x,y), [self.visible_sprites])
+                    Tile((x,y), [self.visible_sprites, self.obstacle_sprites])
                 if column == 'p':
-                    Player((x,y), [self.visible_sprites])
+                    #store player in variable to be targetable
+                    self.player = Player((x,y), [self.visible_sprites])
 
 
                 
@@ -40,4 +43,6 @@ class Room:
     def run(self):
         # update/draw game
         self.visible_sprites.draw(self.display_surf)
+        self.visible_sprites.update()
+        debug(self.player.direction)
 
