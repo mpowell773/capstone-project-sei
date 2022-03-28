@@ -1,7 +1,8 @@
 import pygame, sys
 from settings import *
+from debug import debug
 
-# class object to set up base game functionality such as running and exiting
+#class object to set up base game functionality such as running and exiting
 class Game:
     def __init__(self):
 
@@ -20,14 +21,14 @@ class Game:
                     pygame.quit()
                     sys.exit()
             
-            #fill screen with black
             self.screen.fill('black')
+            debug('hamster')
             #draw updated elements
             pygame.display.update()
             #framerate ceiling
             self.clock.tick(FPS)
 
-
+#if main file, create an instance of game and then run it
 if __name__ == '__main__':
     game = Game()
     game.run()
