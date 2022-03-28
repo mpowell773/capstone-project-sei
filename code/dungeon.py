@@ -62,7 +62,7 @@ class YSortCameraGroup(pygame.sprite.Group):
 
 
         #create floor
-        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/test_room_floor.png').convert()
+        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor.png').convert()
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
 
 

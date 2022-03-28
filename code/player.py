@@ -7,7 +7,7 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)
 
         #get image for player and add rectangle to it
-        self.image = pygame.image.load('../assets/graphics/utility_tiles/blocked_path.png').convert_alpha()
+        self.image = pygame.image.load('../assets/graphics/scaled_images/scaled_cropped_lizard.png').convert_alpha()
         
         self.rect = self.image.get_rect(topleft = position)
         print(self.rect)
