@@ -1,6 +1,7 @@
 import pygame
+from settings import *
+from tile import Tile
 
-from settings import ROOM_1
 
 #class that displays sprites of current room and also handles their interactions
 class Room:
@@ -10,8 +11,8 @@ class Room:
         self.display_surf = pygame.display.get_surface()
 
         #sprite group settings
-        self.visible_sprites = pygame.sprite.Group
-        self.obstacle_sprites = pygame.sprite.Group
+        self.visible_sprites = pygame.sprite.Group()
+        self.obstacle_sprites = pygame.sprite.Group()
 
         #run create_map method to display sprites
         self.create_map()
@@ -22,10 +23,18 @@ class Room:
         for row_index, row in enumerate(ROOM_1):
             #enumerating individual row to get column and element within row
             for column_index, column in enumerate(row):
-                pass
+                #defining x,y position of each tile     
+                x = column_index * TILESIZE
+                y = row_index * TILESIZE
+                
+                #if 'x' map Tile sprite to visible_sprites group in proper position
+                if column == 'x':
+                    Tile((x,y), [self.visible_sprites])
+
+
                 
 
     def run(self):
         # update/draw game
-        pass
+        self.visible_sprites.draw(self.display_surf)
 
