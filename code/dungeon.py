@@ -39,15 +39,25 @@ class Dungeon:
 
     def run(self):
         # update/draw game
-        self.visible_sprites.draw(self.display_surf)
+        self.visible_sprites.custom_draw()
         self.visible_sprites.update()
         debug(self.player.direction)
 
 #camera for game
 class YSortCameraGroup(pygame.sprite.Group):
     def __init__(self):
+
         #inherit sprite group init
         super().__init__()
+        #store main screen in variable
+        self.display_surface = pygame.display.get_surface()
+
+    #method to draw with our camera
+    def custom_draw(self):
+        #for each sprite in group
+        for sprite in self.sprites():
+            #draw them on screen
+            self.display_surface.blit(sprite.image, sprite.rect)
 
 
 
