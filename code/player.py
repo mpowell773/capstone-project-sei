@@ -11,8 +11,8 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft = position)
 
         #movement variables
-        self.direction = pygame.Vector2()
-        self.speed = 1.25
+        self.direction = pygame.math.Vector2()
+        self.speed = 5
 
     def input(self):
         #storing input from player in keys
@@ -30,25 +30,28 @@ class Player(pygame.sprite.Sprite):
             self.direction.y = 0
 
         if keys[pygame.K_RIGHT]:
-            #move left
+            #move right
             self.direction.x = 1
         elif keys[pygame.K_LEFT]:
-            #move right
+            #move left
             self.direction.x = -1
         else:
             #stand still
             self.direction.x = 0
 
-    def move(self, speed):
-        # does the vector have length?
+    def move(self,speed):
         if self.direction.magnitude() != 0:
-            #if so, set to one
             self.direction = self.direction.normalize()
-            
 
-        self.rect.center += (self.direction)
-        
+        self.rect.x += (self.direction.x * speed)
+        # self.collision('horizontal')
+        self.rect.y += (self.direction.y * speed) 
+        # self.collision('vertical')
+		# self.rect.center += self.direction * speed
+
+    
 
     def update(self):
         self.input()
         self.move(self.speed)
+
