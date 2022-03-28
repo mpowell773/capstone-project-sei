@@ -3,6 +3,7 @@ from settings import *
 from tile import Tile
 from player import Player
 from debug import debug
+from misc_functions import import_csv_layout
 
 
 
@@ -22,17 +23,27 @@ class Dungeon:
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
-
+       
+        #dict of layouts 
         layout = {
-            # 'boundary': import_csv_layout('../')
+            'boundary': import_csv_layout('../levels/dungeon/dungeon_FloorBlock.csv')
         }
-        #enumerating to get both row and index
-        # for row_index, row in enumerate(ROOM_1):
-        #     #enumerating individual row to get column and element within row
-        #     for column_index, column in enumerate(row):
-        #         #defining x,y position of each tile     
-        #         x = column_index * TILESIZE
-        #         y = row_index * TILESIZE
+
+        #for loop to cycle through our layout dict
+        for style, layout in layout.items():
+            # enumerating to get both row and index
+            for row_index, row in enumerate(layout):
+                #enumerating individual row to get column and element within row
+                for column_index, column in enumerate(row):
+                    #csv uses -1 as white space instead of ' ', so we must ignore it
+                    if column != '-1':
+                        #defining x,y position of each tile     
+                        x = column_index * TILESIZE
+                        y = row_index * TILESIZE
+                
+                        #checking what key in dict is and then assigning the sprite to the mapped layout
+                        if style == 'boundary':
+                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'invisible')
                 
         #         #if 'x' map Tile sprite to visible_sprites group in proper position
         #         if column == 'x':
