@@ -10,14 +10,15 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load('../assets/graphics/frames/lizard_m_idle_anim_f1.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = position)
 
+        #movement variables
         self.direction = pygame.math.Vector2()
-        self.speed = 5
+        self.speed = 1
 
     def input(self):
         #storing input from player in keys
         keys = pygame.key.get_pressed()
 
-
+        #movement
         if keys[pygame.K_UP]:
             #move up
             self.direction.y = -1
@@ -38,5 +39,9 @@ class Player(pygame.sprite.Sprite):
             #stand still
             self.direction.x = 0
 
+    def move(self, speed):
+        self.rect.center += self.direction * speed
+
     def update(self):
         self.input()
+        self.move(self.speed)
