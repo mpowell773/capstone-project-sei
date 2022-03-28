@@ -7,5 +7,5 @@ class Tile(pygame.sprite.Sprite):
         super().__init__(groups)
 
         #get image for tile and add rectangle to it
-        self.image = pygame.image.load('assets/graphics/frames/wall_mid.png')
+        self.image = pygame.image.load('../assets/graphics/frames/wall_mid.png')
         self.rect = self.image.get_rect(topleft = position)

@@ -7,5 +7,5 @@ class Player(pygame.sprite.Sprite):
         super().__init__(groups)
 
         #get image for tile and add rectangle to it
-        self.image = pygame.image.load('assets/graphics/frames/elf_m_idle_anim_f0.png').convert_alpha()
+        self.image = pygame.image.load('../assets/graphics/frames/lizard_m_idle_anim_f1.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = position)
