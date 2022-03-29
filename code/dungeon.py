@@ -40,6 +40,9 @@ class Dungeon:
             'walls' : import_folder('../assets/graphics/organized_scaled_tile_set/walls'),
             'details' : import_folder('../assets/graphics/organized_scaled_tile_set/details'),
             'crates' : import_folder('../assets/graphics/organized_scaled_tile_set/crates'),
+            'chests' : import_folder('../assets/graphics/organized_scaled_tile_set/chests'),
+            'objects' : import_folder('../assets/graphics/organized_scaled_tile_set/objects'),
+            'doors' : import_folder('../assets/graphics/organized_scaled_tile_set/doors'),
         }
 
         #for loop to cycle through our layout dict
@@ -71,6 +74,19 @@ class Dungeon:
                             crate_image = graphics['crates'][int(column)]
                             Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'crates', crate_image)
 
+                        if style == 'chests':
+                            chest_image = graphics['chests'][int(column)]
+                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'chests', chest_image)
+                        
+                        if style == 'objects':
+                            object_image = graphics['objects'][int(column)]
+                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'objects', object_image)
+
+                        if style == 'doors':
+                            door_image = graphics['doors'][int(column)]
+                            Tile((x,y), [self.visible_sprites], 'doors', door_image)
+
+
         self.player = Player((1600, 3000), [self.visible_sprites], self.obstacle_sprites)
 
     def run(self):
@@ -96,13 +112,12 @@ class YSortCameraGroup(pygame.sprite.Group):
         #vector to move camera
         self.offset = pygame.math.Vector2()
 
-
         #create floor
         self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor_no_walls.png').convert()
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
 
 
-    #method to draw with our camera
+    #adds false depth effect
     def custom_draw(self, player):
 
         #finding offset by getting center of player rect and subtracting respective value to half of screen
@@ -119,6 +134,4 @@ class YSortCameraGroup(pygame.sprite.Group):
             offset_position = sprite.rect.topleft - self.offset
             #draw them on screen
             self.display_surface.blit(sprite.image, offset_position)
-
-
 
