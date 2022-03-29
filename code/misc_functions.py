@@ -1,6 +1,8 @@
 
 #python module that allows you to read csv files
 from csv import reader
+#walk lets you walk through os's file system
+from os import walk
 
 def import_csv_layout(path):
     terrain_map = []
@@ -12,3 +14,7 @@ def import_csv_layout(path):
         for row in layout:
             terrain_map.append(list(row))
         return terrain_map
+
+def import_folder(path):
+    for data in walk(path):
+        print(data)
