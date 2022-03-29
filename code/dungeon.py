@@ -26,13 +26,13 @@ class Dungeon:
        
         #dict of layouts 
         layout = {
-            'boundary': import_csv_layout('../levels/dungeon/dungeon_organized_FloorBlock.csv'),
-            'walls': import_csv_layout('../levels/dungeon/dungeon_organized_Walls.csv'),
-            'details': import_csv_layout('../levels/dungeon/dungeon_organized_Detail.csv'),
-            'crates': import_csv_layout('../levels/dungeon/dungeon_organized_Crates.csv'),
-            'chests': import_csv_layout('../levels/dungeon/dungeon_organized_Chests.csv'),
-            'objects': import_csv_layout('../levels/dungeon/dungeon_organized_Objects.csv'),
-            'doors': import_csv_layout('../levels/dungeon/dungeon_organized_Doors.csv'),
+            'boundary': import_csv_layout('../levels/dungeon/dungeon_clean_Floor_Block.csv'),
+            'walls': import_csv_layout('../levels/dungeon/dungeon_clean_Walls.csv'),
+            'details': import_csv_layout('../levels/dungeon/dungeon_clean_Details.csv'),
+            'crates': import_csv_layout('../levels/dungeon/dungeon_clean_Crates.csv'),
+            'chests': import_csv_layout('../levels/dungeon/dungeon_clean_Chests.csv'),
+            'objects': import_csv_layout('../levels/dungeon/dungeon_clean_Objects.csv'),
+            'doors': import_csv_layout('../levels/dungeon/dungeon_clean_Doors.csv'),
         }
 
         #dict of graphics
@@ -113,7 +113,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()
 
         #create floor
-        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor_no_walls.png').convert()
+        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_clean_floor.png').convert()
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
 
 
