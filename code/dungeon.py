@@ -3,7 +3,7 @@ from settings import *
 from tile import Tile
 from player import Player
 from debug import debug
-from misc_functions import import_csv_layout
+from misc_functions import import_csv_layout, import_folder
 
 
 
@@ -34,6 +34,11 @@ class Dungeon:
             'objects': import_csv_layout('../levels/dungeon/dungeon_Objects.csv'),
         }
 
+        #dict of graphics
+        graphics = {
+            'all_graphics' : import_folder('../assets/graphics/scaled_tile_set')
+        }
+
         #for loop to cycle through our layout dict
         for style, layout in layout.items():
             # enumerating to get both row and index
@@ -51,7 +56,9 @@ class Dungeon:
                             Tile((x,y), [self.obstacle_sprites], 'invisible')
 
                         if style == 'walls':
-                            Tile((x,y), [self.visible_sprites], 'walls')
+                            #go through graphics list
+                            wall_image = graphics['all_graphics'][int(column)]
+                            Tile((x,y), [self.visible_sprites], 'walls', wall_image)
                 
         #         #if 'x' map Tile sprite to visible_sprites group in proper position
         #         if column == 'x':
