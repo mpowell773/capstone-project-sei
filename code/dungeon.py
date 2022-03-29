@@ -26,17 +26,17 @@ class Dungeon:
        
         #dict of layouts 
         layout = {
-            'boundary': import_csv_layout('../levels/dungeon/dungeon_FloorBlock.csv'),
-            'walls': import_csv_layout('../levels/dungeon/dungeon_Walls.csv'),
+            'boundary': import_csv_layout('../levels/dungeon/dungeon_organized_FloorBlock.csv'),
+            'walls': import_csv_layout('../levels/dungeon/dungeon_organized_Walls.csv'),
             'detail': import_csv_layout('../levels/dungeon/dungeon_Detail.csv'),
             'crates': import_csv_layout('../levels/dungeon/dungeon_Crates.csv'),
             'chests': import_csv_layout('../levels/dungeon/dungeon_Chests.csv'),
-            'objects': import_csv_layout('../levels/dungeon/dungeon_Objects.csv'),
+            'objects': import_csv_layout('../levels/dungeon/dungeon_organized_Objects.csv'),
         }
 
         #dict of graphics
         graphics = {
-            'all_graphics' : import_folder('../assets/graphics/scaled_tile_set')
+            'all_graphics' : import_folder('../assets/graphics/organized_scaled_tile_set/walls')
         }
 
         #for loop to cycle through our layout dict
