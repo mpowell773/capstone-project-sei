@@ -28,15 +28,16 @@ class Dungeon:
         layout = {
             'boundary': import_csv_layout('../levels/dungeon/dungeon_organized_FloorBlock.csv'),
             'walls': import_csv_layout('../levels/dungeon/dungeon_organized_Walls.csv'),
-            'detail': import_csv_layout('../levels/dungeon/dungeon_Detail.csv'),
-            'crates': import_csv_layout('../levels/dungeon/dungeon_Crates.csv'),
-            'chests': import_csv_layout('../levels/dungeon/dungeon_Chests.csv'),
+            'details': import_csv_layout('../levels/dungeon/dungeon_organized_Detail.csv'),
+            'crates': import_csv_layout('../levels/dungeon/dungeon_organized_Crates.csv'),
+            'chests': import_csv_layout('../levels/dungeon/dungeon_organized_Chests.csv'),
             'objects': import_csv_layout('../levels/dungeon/dungeon_organized_Objects.csv'),
+            'doors': import_csv_layout('../levels/dungeon/dungeon_organized_Doors.csv'),
         }
 
         #dict of graphics
         graphics = {
-            'all_graphics' : import_folder('../assets/graphics/organized_scaled_tile_set/walls')
+            'walls' : import_folder('../assets/graphics/organized_scaled_tile_set/walls')
         }
 
         #for loop to cycle through our layout dict
@@ -57,7 +58,7 @@ class Dungeon:
 
                         if style == 'walls':
                             #go through graphics list
-                            wall_image = graphics['all_graphics'][int(column)]
+                            wall_image = graphics['walls'][int(column)]
                             Tile((x,y), [self.visible_sprites], 'walls', wall_image)
                 
         #         #if 'x' map Tile sprite to visible_sprites group in proper position
