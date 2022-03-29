@@ -37,7 +37,8 @@ class Dungeon:
 
         #dict of graphics
         graphics = {
-            'walls' : import_folder('../assets/graphics/organized_scaled_tile_set/walls')
+            'walls' : import_folder('../assets/graphics/organized_scaled_tile_set/walls'),
+            'details' : import_folder('../assets/graphics/organized_scaled_tile_set/details'),
         }
 
         #for loop to cycle through our layout dict
@@ -60,13 +61,12 @@ class Dungeon:
                             #go through graphics list
                             wall_image = graphics['walls'][int(column)]
                             Tile((x,y), [self.visible_sprites], 'walls', wall_image)
+                        
+                        if style == 'details':
+                            detail_image = graphics['details'][int(column)]
+                            Tile((x,y), [self.visible_sprites], 'details', detail_image)
                 
-        #         #if 'x' map Tile sprite to visible_sprites group in proper position
-        #         if column == 'x':
-        #             Tile((x,y), [self.visible_sprites, self.obstacle_sprites])
-        #         if column == 'p':
-        #             #store player in variable to be targetable
-        #             self.player = Player((x,y), [self.visible_sprites], self.obstacle_sprites)
+
         self.player = Player((1600, 3000), [self.visible_sprites], self.obstacle_sprites)
 
     def run(self):
