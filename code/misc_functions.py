@@ -1,4 +1,5 @@
 
+import pygame
 #python module that allows you to read csv files
 from csv import reader
 #walk lets you walk through os's file system
@@ -16,5 +17,18 @@ def import_csv_layout(path):
         return terrain_map
 
 def import_folder(path):
-    for data in walk(path):
-        print(data)
+   #declaring empty list to store values
+    surface_list = []
+   
+    #path holds data in third element of list, other two elements not useful to us
+    for _, __, img_files in walk(path):
+        #looping through each image
+        for image in img_files:
+            #concaternating path to img_file and then adding each file as a surface
+            full_path = path + '/' + image
+            image_surface = pygame.image.load(full_path).convert_alpha()
+            #add each surface to list at end of list
+            surface_list.append(image_surface)
+
+        return surface_list
+
