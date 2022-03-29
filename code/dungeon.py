@@ -39,6 +39,7 @@ class Dungeon:
         graphics = {
             'walls' : import_folder('../assets/graphics/organized_scaled_tile_set/walls'),
             'details' : import_folder('../assets/graphics/organized_scaled_tile_set/details'),
+            'crates' : import_folder('../assets/graphics/organized_scaled_tile_set/crates'),
         }
 
         #for loop to cycle through our layout dict
@@ -66,6 +67,9 @@ class Dungeon:
                             detail_image = graphics['details'][int(column)]
                             Tile((x,y), [self.visible_sprites], 'details', detail_image)
                 
+                        if style == 'crates':
+                            crate_image = graphics['crates'][int(column)]
+                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'crates', crate_image)
 
         self.player = Player((1600, 3000), [self.visible_sprites], self.obstacle_sprites)
 
