@@ -108,8 +108,8 @@ class Dungeon:
         self.current_attack = Dagger(self.player, [self.visible_sprites])
 
     def create_arrow(self, damage, cost):
-        print(cost)
         print(damage)
+        print(cost)
 
     def destroy_attack(self):
         #if variable has a data in it

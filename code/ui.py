@@ -85,13 +85,32 @@ class UI:
         #render dagger and text
         self.display_surface.blit(dagger_surface, dagger_rectangle)
         self.display_surface.blit(text_surface, text_rectangle)
+
+    def bow_overlay(self):
+        #return of selection_box gives the rectangle
+        bg_rectangle = self.selection_box(80, 605)  
+       
+        #bow image import 
+        bow_surface = pygame.image.load(bow['graphic']).convert_alpha()
+        #bow is larger sprite so scaling down
+        bow_surface = pygame.transform.rotozoom(bow_surface, 0, .6)
+
+        #create bow_rectangle and use bg_rectangle as reference
+        bow_rectangle = bow_surface.get_rect(center = bg_rectangle.center)
+        
+        #add key command text
+        text_surface = self.font.render('X', False, TEXT_COLOR)
+        #using Vector2 to move the text a tad to the left
+        text_rectangle = text_surface.get_rect(bottomright = bg_rectangle.bottomright + pygame.math.Vector2(-5, 0))
+        
+        #render dagger and text
+        self.display_surface.blit(bow_surface, bow_rectangle)
+        self.display_surface.blit(text_surface, text_rectangle)
         
 
     def display(self, player):
         self.heart_bar(player.health)
-
-        #bow
-        self.selection_box(80, 605) 
+        self.bow_overlay()
         self.dagger_overlay()
 
         
