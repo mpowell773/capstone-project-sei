@@ -10,10 +10,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load('../assets/graphics/scaled_images/scaled_cropped_lizard.png').convert_alpha()
         
         self.rect = self.image.get_rect(topleft = position)
-        print(self.rect)
-     
-
-
+        
 
         #reducing rect and returning new variable so that player image can overlap with obstacles
         self.hitbox = self.rect.inflate(0, -26)
@@ -21,6 +18,9 @@ class Player(pygame.sprite.Sprite):
         #movement variables
         self.direction = pygame.math.Vector2()
         self.speed = 5
+        self.attacking = False
+        self.attack_cooldown = 600
+        self.attack_time = None
 
         #need obstacle_sprites to check for collisions
         self.obstacle_sprites = obstacle_sprites
@@ -51,11 +51,17 @@ class Player(pygame.sprite.Sprite):
             self.direction.x = 0
 
         #attack input
-        if keys[pygame.K_z]:
+        if keys[pygame.K_z] and not self.attacking:
+            #set to true so no more attacks happen
+            self.attacking = True
+            #creating a timer
+            self.attack_time = pygame.time.get_ticks()
             print('attack')
 
         #bow input
-        if keys[pygame.K_x]:
+        if keys[pygame.K_x] and not self.attacking:
+            self.attacking = True
+            
             print('bow')
 
     def move(self,speed):
@@ -92,8 +98,18 @@ class Player(pygame.sprite.Sprite):
                         self.hitbox.bottom = sprite.hitbox.top
                     if self.direction.y < 0:
                         self.hitbox.top = sprite.hitbox.bottom
+
+    def cooldowns(self):
+        #running infinite timer to compare attack/bow timers to it
+        current_time = pygame.time.get_ticks()
+
+        if self.attacking:
+            #subtract total game time from when attack timer initiated
+            if current_time - self.attack_time >= self.attack_cooldown:
+                self.attacking = False
 	
     def update(self):
         self.input()
+        self.cooldowns()
         self.move(self.speed)
 
