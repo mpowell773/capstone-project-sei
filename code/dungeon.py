@@ -62,7 +62,7 @@ class Dungeon:
                             Tile((x,y), [self.obstacle_sprites], 'invisible')
 
                         if style == 'walls':
-                            #go through graphics list
+                            #go through graphics list and use index of list to properly assign images
                             wall_image = graphics['walls'][int(column)]
                             Tile((x,y), [self.visible_sprites], 'walls', wall_image)
                         

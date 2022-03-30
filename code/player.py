@@ -50,6 +50,14 @@ class Player(pygame.sprite.Sprite):
             #stand still
             self.direction.x = 0
 
+        #attack input
+        if keys[pygame.K_z]:
+            print('attack')
+
+        #bow input
+        if keys[pygame.K_x]:
+            print('bow')
+
     def move(self,speed):
         # does the vector have length?
         if self.direction.magnitude() != 0:
