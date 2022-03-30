@@ -35,6 +35,7 @@ class Player(pygame.sprite.Sprite):
         self.attack_time = None
         self.create_attack = create_attack
 
+
         #need obstacle_sprites to check for collisions
         self.obstacle_sprites = obstacle_sprites
 

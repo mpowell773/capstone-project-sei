@@ -1,4 +1,5 @@
 import pygame
+from settings import *
 
 class Dagger(pygame.sprite.Sprite):
     def __init__(self, player, groups):
@@ -8,8 +9,9 @@ class Dagger(pygame.sprite.Sprite):
         direction = player.direction_weapon
         
     
-       #graphic of weapon
-        self.image = pygame.Surface((40,40))
+       #graphic of dagger
+        full_path = f'../assets/graphics/organized_scaled_tile_set/weapons/dagger/{direction}.png'
+        self.image = pygame.image.load(full_path).convert_alpha()
 
         #placement of weapon
         #offsets due to weird hitbox
