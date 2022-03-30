@@ -19,6 +19,9 @@ class Dungeon:
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
 
+        #attack sprites
+        self.current_attack = None
+
         #run create_map method to display sprites
         self.create_map()
 
@@ -88,10 +91,18 @@ class Dungeon:
                             Tile((x,y), [self.visible_sprites], 'doors', door_image)
 
         #spawn player into dungeon
-        self.player = Player((1600, 2800), [self.visible_sprites], self.obstacle_sprites, self.create_attack)
+        self.player = Player((1600, 2800), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_attack)
 
     def create_attack(self):
-        Dagger(self.player, [self.visible_sprites])
+       self.current_attack = Dagger(self.player, [self.visible_sprites])
+
+    def destroy_attack(self):
+        #if variable has a data in it
+        if self.current_attack:
+            #destroy the weapon sprite
+            self.current_attack.kill()
+        #set to None afterwards
+        self.current_attack = None
 
     def run(self):
         # update/draw game

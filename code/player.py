@@ -3,7 +3,7 @@ from settings import *
 from misc_functions import import_folder
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, groups, obstacle_sprites, create_attack):
+    def __init__(self, position, groups, obstacle_sprites, create_attack, destroy_attack):
         #need to inherit from sprite class via super
         super().__init__(groups)
 
@@ -34,6 +34,7 @@ class Player(pygame.sprite.Sprite):
         self.attack_cooldown = 450
         self.attack_time = None
         self.create_attack = create_attack
+        self.destroy_attack = destroy_attack
 
 
         #need obstacle_sprites to check for collisions
@@ -169,6 +170,8 @@ class Player(pygame.sprite.Sprite):
             #subtract total game time from when attack timer initiated
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.attacking = False
+                #invoke destroy_attack to remove dagger sprite
+                self.destroy_attack()
 
     def animate(self):
         animation = self.animations[self.status]
