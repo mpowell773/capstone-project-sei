@@ -8,12 +8,12 @@ class Player(pygame.sprite.Sprite):
 
         #get image for player and add rectangle to it
         self.image = pygame.image.load('../assets/graphics/scaled_images/scaled_cropped_lizard.png').convert_alpha()
-        
         self.rect = self.image.get_rect(topleft = position)
-        
-
         #reducing rect and returning new variable so that player image can overlap with obstacles
         self.hitbox = self.rect.inflate(0, -26)
+
+        #graphics setup
+        self.import_player_assets()
 
         #movement variables
         self.direction = pygame.math.Vector2()
@@ -24,6 +24,14 @@ class Player(pygame.sprite.Sprite):
 
         #need obstacle_sprites to check for collisions
         self.obstacle_sprites = obstacle_sprites
+
+    def import_player_assets(self):
+        character_path = '../assets/graphics/organized_scaled_tile_set/entities/player'
+        self.animations = {'idle' : [], 'move': []}
+
+        for animation in self.animations.keys():
+            print(animation)
+
 
     def input(self):
         #storing input from player in keys
@@ -61,7 +69,7 @@ class Player(pygame.sprite.Sprite):
         #bow input
         if keys[pygame.K_x] and not self.attacking:
             self.attacking = True
-            
+            self.attack_time = pygame.time.get_ticks()
             print('bow')
 
     def move(self,speed):
