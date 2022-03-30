@@ -11,7 +11,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load('../assets/graphics/scaled_images/scaled_cropped_lizard.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = position)
         #reducing rect and returning new variable so that player image can overlap with obstacles
-        self.hitbox = self.rect.inflate(0, -26)
+        self.hitbox = self.rect.inflate(0, -45)
+
 
         #graphics setup
         self.import_player_assets()

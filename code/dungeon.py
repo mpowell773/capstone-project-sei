@@ -87,7 +87,7 @@ class Dungeon:
                             Tile((x,y), [self.visible_sprites], 'doors', door_image)
 
 
-        self.player = Player((1600, 3000), [self.visible_sprites], self.obstacle_sprites)
+        self.player = Player((1600, 2800), [self.visible_sprites], self.obstacle_sprites)
 
     def run(self):
         # update/draw game
