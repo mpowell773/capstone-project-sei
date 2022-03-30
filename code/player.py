@@ -27,7 +27,8 @@ class Player(pygame.sprite.Sprite):
 
         #movement variables
         self.direction = pygame.math.Vector2()
-        self.speed = 5
+        #need obstacle_sprites to check for collisions
+        self.obstacle_sprites = obstacle_sprites
 
         #attack variables
         self.attacking = False
@@ -36,9 +37,14 @@ class Player(pygame.sprite.Sprite):
         self.create_attack = create_attack
         self.destroy_attack = destroy_attack
 
+        #stats
+        self.stats = {'max_health': 6, 'ammo': 0, 'melee_attack': 1, 'range_attack': 2, 'speed': 5}
+        self.health = self.stats['max_health']
+        self.ammo = self.stats['ammo']
+        self.speed = self.stats['speed']
 
-        #need obstacle_sprites to check for collisions
-        self.obstacle_sprites = obstacle_sprites
+
+
 
     def import_player_assets(self):
         #path to character images

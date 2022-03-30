@@ -5,6 +5,7 @@ from player import Player
 from debug import debug
 from misc_functions import import_csv_layout, import_folder
 from weapon import Dagger
+from ui import UI
 
 
 
@@ -24,6 +25,9 @@ class Dungeon:
 
         #run create_map method to display sprites
         self.create_map()
+
+        # user inteface
+        self.ui = UI()
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
@@ -108,7 +112,7 @@ class Dungeon:
         # update/draw game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-        debug(self.player.direction_weapon)
+        self.ui.display(self.player)
 
 #camera for game
 class YSortCameraGroup(pygame.sprite.Group):
