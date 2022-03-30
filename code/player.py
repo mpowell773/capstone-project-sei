@@ -21,6 +21,7 @@ class Player(pygame.sprite.Sprite):
         self.import_player_assets()
         #player animation state
         self.status = 'right'
+        self.direction_weapon = 'right'
         self.frame_index = 0
         self.animation_speed = 0.1
 
@@ -59,9 +60,11 @@ class Player(pygame.sprite.Sprite):
                 if keys[pygame.K_UP]:
                     #move up
                     self.direction.y = -1
+                    self.direction_weapon = 'up'
                 elif keys[pygame.K_DOWN]:
                     #move down
                     self.direction.y = 1
+                    self.direction_weapon = 'down'
                 else:
                     #stand still
                     self.direction.y = 0
@@ -70,10 +73,12 @@ class Player(pygame.sprite.Sprite):
                     #move right
                     self.direction.x = 1
                     self.status = 'right'
+                    self.direction_weapon = 'right'
                 elif keys[pygame.K_LEFT]:
                     #move left
                     self.direction.x = -1
                     self.status = 'left'
+                    self.direction_weapon = 'left'
                 else:
                     #stand still
                     self.direction.x = 0

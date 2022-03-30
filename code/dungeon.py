@@ -97,7 +97,7 @@ class Dungeon:
         # update/draw game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
-        debug(self.player.status)
+        debug(self.player.direction_weapon)
 
 #camera for game
 class YSortCameraGroup(pygame.sprite.Group):
