@@ -11,7 +11,7 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.image.load('../assets/graphics/scaled_images/scaled_cropped_lizard.png').convert_alpha()
         self.rect = self.image.get_rect(topleft = position)
         #reducing rect and returning new variable so that player image can overlap with obstacles
-        self.hitbox = self.rect.inflate(0, -45)
+        self.hitbox = self.rect.inflate(0, -50)
 
 
         #graphics setup
@@ -47,43 +47,46 @@ class Player(pygame.sprite.Sprite):
     def input(self):
         #storing input from player in keys
         keys = pygame.key.get_pressed()
+      
+        #disable player input while attack happens
+        if not self.attacking:
+            #movement input
+            if not self.attacking:
+                if keys[pygame.K_UP]:
+                    #move up
+                    self.direction.y = -1
+                elif keys[pygame.K_DOWN]:
+                    #move down
+                    self.direction.y = 1
+                else:
+                    #stand still
+                    self.direction.y = 0
 
-        #movement input
-        if keys[pygame.K_UP]:
-            #move up
-            self.direction.y = -1
-        elif keys[pygame.K_DOWN]:
-            #move down
-            self.direction.y = 1
-        else:
-            #stand still
-            self.direction.y = 0
+                if keys[pygame.K_RIGHT]:
+                    #move right
+                    self.direction.x = 1
+                    self.status = 'right'
+                elif keys[pygame.K_LEFT]:
+                    #move left
+                    self.direction.x = -1
+                    self.status = 'left'
+                else:
+                    #stand still
+                    self.direction.x = 0
 
-        if keys[pygame.K_RIGHT]:
-            #move right
-            self.direction.x = 1
-            self.status = 'right'
-        elif keys[pygame.K_LEFT]:
-            #move left
-            self.direction.x = -1
-            self.status = 'left'
-        else:
-            #stand still
-            self.direction.x = 0
+            #attack input
+            if keys[pygame.K_z]:
+                #set to true so no more attacks happen
+                self.attacking = True
+                #creating a timer
+                self.attack_time = pygame.time.get_ticks()
+                print('attack')
 
-        #attack input
-        if keys[pygame.K_z] and not self.attacking:
-            #set to true so no more attacks happen
-            self.attacking = True
-            #creating a timer
-            self.attack_time = pygame.time.get_ticks()
-            print('attack')
-
-        #bow input
-        if keys[pygame.K_x] and not self.attacking:
-            self.attacking = True
-            self.attack_time = pygame.time.get_ticks()
-            print('bow')
+            #bow input
+            if keys[pygame.K_x]:
+                self.attacking = True
+                self.attack_time = pygame.time.get_ticks()
+                print('bow')
 
     def get_status(self):
         #idle and vertical move status status
@@ -165,7 +168,9 @@ class Player(pygame.sprite.Sprite):
             self.frame_index = 0
         #set image
         self.image = animation[int(self.frame_index)]
-        self.rect = self.image.get_rect(center = self.hitbox.center)
+        self.rect = self.image.get_rect(center= self.hitbox.center)
+        
+        
    
     def update(self):
         self.input()
