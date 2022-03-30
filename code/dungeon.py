@@ -129,9 +129,12 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.display_surface.blit(self.floor_surface, offset_position_floor)
 
         #for each sprite in group sort them by their y position
+        
         for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
             #subtract offset from sprite rect
             offset_position = sprite.rect.topleft - self.offset
             #draw them on screen
             self.display_surface.blit(sprite.image, offset_position)
+
+
 
