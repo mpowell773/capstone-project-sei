@@ -14,11 +14,11 @@ class Player(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(0, -26)
 
         #graphics setup
-       
-        #importing player assets
         self.import_player_assets()
         #player animation state
         self.status = 'right'
+        self.frame_index = 0
+        self.animation_speed = 0.1
 
         #movement variables
         self.direction = pygame.math.Vector2()
@@ -26,7 +26,7 @@ class Player(pygame.sprite.Sprite):
 
         #attack variables
         self.attacking = False
-        self.attack_cooldown = 600
+        self.attack_cooldown = 450
         self.attack_time = None
 
         #need obstacle_sprites to check for collisions
@@ -36,7 +36,7 @@ class Player(pygame.sprite.Sprite):
         #path to character images
         character_path = '../assets/graphics/organized_scaled_tile_set/entities/player'
         #different states of animation
-        self.animations = {'left_idle' : [], 'right_idle' : [], 'move_left': [], 'move_right' : []}
+        self.animations = {'left_idle' : [], 'right_idle' : [], 'left': [], 'right' : [], 'left_attack' : [], 'right_attack' : []}
 
         for animation in self.animations.keys():
             #importing files from our player folder into our animations dict
@@ -51,11 +51,9 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_UP]:
             #move up
             self.direction.y = -1
-            self.status = 'up'
         elif keys[pygame.K_DOWN]:
             #move down
             self.direction.y = 1
-            self.status = 'down'
         else:
             #stand still
             self.direction.y = 0
@@ -87,8 +85,12 @@ class Player(pygame.sprite.Sprite):
             print('bow')
 
     def get_status(self):
-        #idle status
-        if self.direction. x == 0 and self.direction.y == 0:
+        #idle and vertical move status status
+        #if player is moving
+        if self.direction.y != 0:
+            self.status = self.status.replace('_idle', '')
+        #if 0 on both axis, set to idle
+        elif self.direction. x == 0 and self.direction.y == 0:
             #conditional to add idle only once
             if not 'idle' in self.status and not 'attack' in self.status:
                 #this way of updating the status allows direction to not be overwritten
@@ -152,10 +154,22 @@ class Player(pygame.sprite.Sprite):
             #subtract total game time from when attack timer initiated
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.attacking = False
-	
+
+    def animate(self):
+        animation = self.animations[self.status]
+        
+        #loop over frame index
+        self.frame_index += self.animation_speed
+        if self.frame_index >= len(animation):
+            self.frame_index = 0
+        #set image
+        self.image = animation[int(self.frame_index)]
+        self.rect = self.image.get_rect(center = self.hitbox.center)
+   
     def update(self):
         self.input()
         self.cooldowns()
         self.get_status()
+        self.animate()
         self.move(self.speed)
 
