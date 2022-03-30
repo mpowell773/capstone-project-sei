@@ -4,6 +4,7 @@ from tile import Tile
 from player import Player
 from debug import debug
 from misc_functions import import_csv_layout, import_folder
+from weapon import Dagger
 
 
 
@@ -86,8 +87,11 @@ class Dungeon:
                             door_image = graphics['doors'][int(column)]
                             Tile((x,y), [self.visible_sprites], 'doors', door_image)
 
+        #spawn player into dungeon
+        self.player = Player((1600, 2800), [self.visible_sprites], self.obstacle_sprites, self.create_attack)
 
-        self.player = Player((1600, 2800), [self.visible_sprites], self.obstacle_sprites)
+    def create_attack(self):
+        Dagger(self.player, [self.visible_sprites])
 
     def run(self):
         # update/draw game

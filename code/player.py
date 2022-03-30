@@ -3,15 +3,18 @@ from settings import *
 from misc_functions import import_folder
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, groups, obstacle_sprites):
+    def __init__(self, position, groups, obstacle_sprites, create_attack):
         #need to inherit from sprite class via super
         super().__init__(groups)
 
         #get image for player and add rectangle to it
         self.image = pygame.image.load('../assets/graphics/scaled_images/scaled_cropped_lizard.png').convert_alpha()
+        self.image_height = self.image.get_size()
+        print(self.image_height)
         self.rect = self.image.get_rect(topleft = position)
         #reducing rect and returning new variable so that player image can overlap with obstacles
         self.hitbox = self.rect.inflate(0, -50)
+
 
 
         #graphics setup
@@ -29,6 +32,7 @@ class Player(pygame.sprite.Sprite):
         self.attacking = False
         self.attack_cooldown = 450
         self.attack_time = None
+        self.create_attack = create_attack
 
         #need obstacle_sprites to check for collisions
         self.obstacle_sprites = obstacle_sprites
@@ -80,7 +84,7 @@ class Player(pygame.sprite.Sprite):
                 self.attacking = True
                 #creating a timer
                 self.attack_time = pygame.time.get_ticks()
-                print('attack')
+                self.create_attack()
 
             #bow input
             if keys[pygame.K_x]:
@@ -126,7 +130,8 @@ class Player(pygame.sprite.Sprite):
         self.collision('horizontal')
         self.hitbox.y += (self.direction.y * speed) 
         self.collision('vertical')
-        self.rect.center = self.hitbox.center
+        #update rect to be hitbox subtracting from the y to adjust for strange pixel height
+        self.rect.center = (self.hitbox.center[0], self.hitbox.center[1] - 20)
     
     def collision(self, direction):
         if direction == 'horizontal':
