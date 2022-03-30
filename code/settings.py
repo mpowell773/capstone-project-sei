@@ -11,8 +11,9 @@ NATIVE_SCREEN = pygame.Surface((WIDTH , HEIGHT))
 
 #UI
 
-HEART_SIZE = 20
-HEART_WIDTH = 200
+HEART_SIZE = .75
+HEART_SPACING = 45
+HEART_STARTING_POSITION = 15
 HEART_FULL = '../assets/graphics/organized_scaled_tile_set/ui/full.png'
 HEART_HALF = '../assets/graphics/organized_scaled_tile_set/ui/half.png'
 HEART_EMPTY = '../assets/graphics/organized_scaled_tile_set/ui/empty.png'

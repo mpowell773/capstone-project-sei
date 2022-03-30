@@ -39,7 +39,7 @@ class Player(pygame.sprite.Sprite):
 
         #stats
         self.stats = {'max_health': 6, 'ammo': 0, 'melee_attack': 1, 'range_attack': 2, 'speed': 5}
-        self.health = self.stats['max_health']
+        self.health =  3 #self.stats['max_health']
         self.ammo = self.stats['ammo']
         self.speed = self.stats['speed']
 
@@ -104,6 +104,25 @@ class Player(pygame.sprite.Sprite):
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 print('bow')
+
+            #test for losing hp
+            if keys[pygame.K_k]:
+                self.attacking = True
+                self.attack_time = pygame.time.get_ticks()
+                if self.health <= 0:
+                    self.health = 0
+                else:
+                    self.health -= 1
+            
+            #test for gaining hp
+            if keys[pygame.K_j]:
+                self.attacking = True
+                self.attack_time = pygame.time.get_ticks()
+                if self.health >= 6:
+                    self.health == 6
+                else:
+                    self.health += 1
+           
 
     def get_status(self):
         #idle and vertical move status status
