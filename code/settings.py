@@ -7,10 +7,7 @@ FPS = 60
 TILESIZE = 64
 NATIVE_SCREEN = pygame.Surface((WIDTH , HEIGHT))
 
-
-
 #UI
-
 HEART_SIZE = .75
 HEART_SPACING = 45
 HEART_STARTING_POSITION = 15
@@ -23,14 +20,15 @@ UI_FONT_SIZE = 36
 
 ITEM_BOX_SIZE = 80
 
-#General colors
+#UI Colors
 WATER_COLOR = '#71ddee'
 UI_BG_COLOR = '#333333'
 UI_BORDER_COLOR = '#DADADA'
 TEXT_COLOR = '#DADADA'
 
-#UI Colors
-UI_BORDER_COLOR_ACTIVE = 'gold'
 
 #Weapon
-dagger = {'cooldown' : 100, 'damage': 5, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
+dagger = {'cooldown' : 100, 'damage': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
+
+#Bow
+bow = {'damage': 2, 'cost': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/bow/right.png'}

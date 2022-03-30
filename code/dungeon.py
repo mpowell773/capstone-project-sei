@@ -95,10 +95,21 @@ class Dungeon:
                             Tile((x,y), [self.visible_sprites], 'doors', door_image)
 
         #spawn player into dungeon
-        self.player = Player((1600, 2800), [self.visible_sprites], self.obstacle_sprites, self.create_attack, self.destroy_attack)
+        self.player = Player(
+            (1600, 2800), 
+            [self.visible_sprites], 
+            self.obstacle_sprites, 
+            self.create_attack,
+            self.destroy_attack,
+            self.create_arrow)
 
     def create_attack(self):
-       self.current_attack = Dagger(self.player, [self.visible_sprites])
+        #when invoked, create this sprite and do its actions
+        self.current_attack = Dagger(self.player, [self.visible_sprites])
+
+    def create_arrow(self, damage, cost):
+        print(cost)
+        print(damage)
 
     def destroy_attack(self):
         #if variable has a data in it

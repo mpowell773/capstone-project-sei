@@ -3,7 +3,7 @@ from settings import *
 from misc_functions import import_folder
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, position, groups, obstacle_sprites, create_attack, destroy_attack):
+    def __init__(self, position, groups, obstacle_sprites, create_attack, destroy_attack, create_arrow):
         #need to inherit from sprite class via super
         super().__init__(groups)
 
@@ -37,9 +37,13 @@ class Player(pygame.sprite.Sprite):
         self.create_attack = create_attack
         self.destroy_attack = destroy_attack
 
+        #bow variables
+        self.bow = bow
+        self.create_arrow = create_arrow
+
         #stats
         self.stats = {'max_health': 6, 'ammo': 0, 'melee_attack': 1, 'range_attack': 2, 'speed': 5}
-        
+
         self.health = self.stats['max_health']
         self.ammo = self.stats['ammo']
         self.speed = self.stats['speed']
@@ -104,7 +108,7 @@ class Player(pygame.sprite.Sprite):
             if keys[pygame.K_x]:
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
-                print('bow')
+                self.create_arrow(bow['damage'], bow['cost'])
 
             #test for losing hp
             if keys[pygame.K_k]:
