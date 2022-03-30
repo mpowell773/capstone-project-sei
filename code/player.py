@@ -14,9 +14,11 @@ class Player(pygame.sprite.Sprite):
         self.hitbox = self.rect.inflate(0, -26)
 
         #graphics setup
+       
+        #importing player assets
         self.import_player_assets()
-
-        self.status = 'down'
+        #player animation state
+        self.status = 'right'
 
         #movement variables
         self.direction = pygame.math.Vector2()
@@ -34,7 +36,7 @@ class Player(pygame.sprite.Sprite):
         #path to character images
         character_path = '../assets/graphics/organized_scaled_tile_set/entities/player'
         #different states of animation
-        self.animations = {'idle_left' : [], 'idle_right' : [], 'move_left': [], 'move_right' : []}
+        self.animations = {'left_idle' : [], 'right_idle' : [], 'move_left': [], 'move_right' : []}
 
         for animation in self.animations.keys():
             #importing files from our player folder into our animations dict
@@ -49,9 +51,11 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_UP]:
             #move up
             self.direction.y = -1
+            self.status = 'up'
         elif keys[pygame.K_DOWN]:
             #move down
             self.direction.y = 1
+            self.status = 'down'
         else:
             #stand still
             self.direction.y = 0
@@ -59,9 +63,11 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_RIGHT]:
             #move right
             self.direction.x = 1
+            self.status = 'right'
         elif keys[pygame.K_LEFT]:
             #move left
             self.direction.x = -1
+            self.status = 'left'
         else:
             #stand still
             self.direction.x = 0
@@ -83,7 +89,8 @@ class Player(pygame.sprite.Sprite):
     def get_status(self):
         #idle status
         if self.direction. x == 0 and self.direction.y == 0:
-            pass
+            #this way of updating the status allows direction to not be overwritten
+            self.status = self.status + '_idle'
 
     def move(self,speed):
         # does the vector have length?
@@ -132,5 +139,6 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.input()
         self.cooldowns()
+        # self.get_status()
         self.move(self.speed)
 
