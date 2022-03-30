@@ -19,15 +19,15 @@ HEART_HALF = '../assets/graphics/organized_scaled_tile_set/ui/half.png'
 HEART_EMPTY = '../assets/graphics/organized_scaled_tile_set/ui/empty.png'
 
 UI_FONT = '../assets/font/Pixellettersfull-BnJ5.ttf'
-UI_FONT_SIZE = 18
+UI_FONT_SIZE = 36
 
 ITEM_BOX_SIZE = 80
 
 #General colors
 WATER_COLOR = '#71ddee'
-UI_BG_COLOR = '#222222'
+UI_BG_COLOR = '#333333'
 UI_BORDER_COLOR = '#DADADA'
-TEXT_COLOR = '#EEEEEE'
+TEXT_COLOR = '#DADADA'
 
 #UI Colors
 UI_BORDER_COLOR_ACTIVE = 'gold'

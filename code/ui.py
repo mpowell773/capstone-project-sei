@@ -71,13 +71,20 @@ class UI:
     def dagger_overlay(self):
         #return of selection_box gives the rectangle
         bg_rectangle = self.selection_box(15, 625)  
-        #dagger image import 
+       
+       #dagger image import 
         dagger_surface = pygame.image.load(dagger['graphic']).convert_alpha()
         #create dagger_rectangle and use bg_rectangle as reference
         dagger_rectangle = dagger_surface.get_rect(center = bg_rectangle.center)
-        #render dagger
-        self.display_surface.blit(dagger_surface, dagger_rectangle)
         
+        #add key command text
+        text_surface = self.font.render('Z', False, TEXT_COLOR)
+        #using Vector2 to move the text a tad to the left
+        text_rectangle = text_surface.get_rect(bottomright = bg_rectangle.bottomright + pygame.math.Vector2(-5, 0))
+        
+        #render dagger and text
+        self.display_surface.blit(dagger_surface, dagger_rectangle)
+        self.display_surface.blit(text_surface, text_rectangle)
         
 
     def display(self, player):
