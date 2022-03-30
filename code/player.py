@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from misc_functions import import_folder
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, position, groups, obstacle_sprites):
@@ -26,12 +27,15 @@ class Player(pygame.sprite.Sprite):
         self.obstacle_sprites = obstacle_sprites
 
     def import_player_assets(self):
+        #path to character images
         character_path = '../assets/graphics/organized_scaled_tile_set/entities/player'
+        #different states of animation
         self.animations = {'idle' : [], 'move': []}
 
         for animation in self.animations.keys():
-            print(animation)
-
+            #importing files from our player folder into our animations dict
+            self.animations[animation] = import_folder(character_path + '/' + animation)
+            
 
     def input(self):
         #storing input from player in keys
