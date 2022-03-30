@@ -89,8 +89,25 @@ class Player(pygame.sprite.Sprite):
     def get_status(self):
         #idle status
         if self.direction. x == 0 and self.direction.y == 0:
-            #this way of updating the status allows direction to not be overwritten
-            self.status = self.status + '_idle'
+            #conditional to add idle only once
+            if not 'idle' in self.status and not 'attack' in self.status:
+                #this way of updating the status allows direction to not be overwritten
+                self.status = self.status + '_idle'
+
+        #attack status
+        if self.attacking:
+            #stop player movement
+            self.direction.x = 0
+            self.direction.y = 0
+            if not 'attack' in self.status:
+                if 'idle' in self.status:
+                    #overwrite idle
+                    self.status = self.status.replace('_idle','_attack')
+                else:
+                    self.status = self.status + '_attack'
+        #switch back to idle after attack
+        else:
+            self.status = self.status.replace('_attack', '_idle')
 
     def move(self,speed):
         # does the vector have length?
@@ -139,6 +156,6 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.input()
         self.cooldowns()
-        # self.get_status()
+        self.get_status()
         self.move(self.speed)
 
