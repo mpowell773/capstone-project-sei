@@ -16,9 +16,13 @@ class Player(pygame.sprite.Sprite):
         #graphics setup
         self.import_player_assets()
 
+        self.status = 'down'
+
         #movement variables
         self.direction = pygame.math.Vector2()
         self.speed = 5
+
+        #attack variables
         self.attacking = False
         self.attack_cooldown = 600
         self.attack_time = None
@@ -30,7 +34,7 @@ class Player(pygame.sprite.Sprite):
         #path to character images
         character_path = '../assets/graphics/organized_scaled_tile_set/entities/player'
         #different states of animation
-        self.animations = {'idle' : [], 'move': []}
+        self.animations = {'idle_left' : [], 'idle_right' : [], 'move_left': [], 'move_right' : []}
 
         for animation in self.animations.keys():
             #importing files from our player folder into our animations dict
@@ -75,6 +79,11 @@ class Player(pygame.sprite.Sprite):
             self.attacking = True
             self.attack_time = pygame.time.get_ticks()
             print('bow')
+
+    def get_status(self):
+        #idle status
+        if self.direction. x == 0 and self.direction.y == 0:
+            pass
 
     def move(self,speed):
         # does the vector have length?
