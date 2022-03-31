@@ -109,12 +109,8 @@ class Dungeon:
                                     self.create_arrow)
                             else:
                                 #spawn enemy onto map
-                                Enemy('enemy', (x,y), [self.visible_sprites])
+                                Enemy('skoolie', (x,y), [self.visible_sprites])
                                 
-
-
-
-
     def create_attack(self):
         #when invoked, create this sprite and do its actions
         self.current_attack = Dagger(self.player, [self.visible_sprites])
