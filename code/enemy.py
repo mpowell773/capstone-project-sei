@@ -76,8 +76,9 @@ class Enemy(Entity):
         if self.status == 'attack':
             print('attack')
         elif self.status == 'move':
-            pass
+            self.direction = self.get_player_distance_direction(player)[1]
         else:
+            #insurance line to make sure direction sets to 0
             self.direction = pygame.math.Vector2()
 
     def update(self):
@@ -85,4 +86,5 @@ class Enemy(Entity):
 
     def enemy_update(self, player):
         self.get_status(player)
+        self.actions(player)
 

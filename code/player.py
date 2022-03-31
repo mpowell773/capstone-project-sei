@@ -10,8 +10,6 @@ class Player(Entity):
 
         #get image for player and add rectangle to it
         self.image = pygame.image.load('../assets/graphics/scaled_images/scaled_cropped_lizard.png').convert_alpha()
-        self.image_height = self.image.get_size()
-        print(self.image_height)
         self.rect = self.image.get_rect(topleft = position)
         #reducing rect and returning new variable so that player image can overlap with obstacles
         self.hitbox = self.rect.inflate(0, -50)
