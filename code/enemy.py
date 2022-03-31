@@ -40,7 +40,7 @@ class Enemy(Entity):
 
     def import_assets(self, name):
         #defining dict of different animations states
-        self.animations = {'idle': [], 'move': [], 'attack': []}
+        self.animations = {'left_idle' : [], 'right_idle' : [], 'left': [], 'right' : [], 'left_attack' : [], 'right_attack' : []}
         #variable to store flexible path to whatever asset
         main_path = f'../assets/graphics/organized_scaled_tile_set/entities/{name}/'
         #loop through different keys and fill out lists with graphics
@@ -71,7 +71,7 @@ class Enemy(Entity):
 
         #conditional logic to check enemy's distance from player. Change status of enemy if condition satisfied
         if distance <= self.attack_radius and self.can_attack:
-            #conditional to make sure frame is at 0 when attacking
+            #conditional to make sure frame is at 0 cooldown is not attack
             if self.status != 'attack':
                 self.frame_index = 0
             self.status = 'attack'
@@ -82,11 +82,14 @@ class Enemy(Entity):
 
     def actions(self, player):
         if self.status == 'attack':
-            self.attack_time = pygame.time.get_ticks()
+            #set to false so enemy can't keep attacking
             self.can_attack = False
+            #start attack_timer
+            self.attack_time = pygame.time.get_ticks()
             print('attack')
         elif self.status == 'move':
             self.direction = self.get_player_distance_direction(player)[1]
+            print(self.direction)
         else:
             #insurance line to make sure direction sets to 0
             self.direction = pygame.math.Vector2()
@@ -95,6 +98,7 @@ class Enemy(Entity):
         if not self.can_attack:
             current_time = pygame.time.get_ticks()
 
+            #attack cooldown
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.can_attack = True
 
