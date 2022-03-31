@@ -108,8 +108,13 @@ class Dungeon:
                                     self.destroy_attack,
                                     self.create_arrow)
                             else:
-                                #spawn enemy onto map
-                                Enemy('skoolie', (x,y), [self.visible_sprites])
+                                #spawn enemies onto map
+                                #conditional logic to pass correct enemy name via csv file down to enemy class
+                                if column == '1': enemy_name = 'skoolie'
+                                elif column == '2': enemy_name = 'slime'
+                                else: enemy_name = 'grelmo'
+
+                                Enemy(enemy_name, (x,y), [self.visible_sprites])
                                 
     def create_attack(self):
         #when invoked, create this sprite and do its actions
