@@ -42,6 +42,47 @@ class Enemy(Entity):
         for animation in self.animations.keys():
             self.animations[animation] = import_folder(main_path + animation)
     
+    def get_player_distance_direction(self,player):
+        #declaring variables to hold vector of enemy position and player player
+        enemy_vector = pygame.math.Vector2(self.rect.center)
+        player_vector = pygame.math.Vector2(player.rect.center)
+
+        #vector.magnitude converts vector into distance
+        distance = (player_vector - enemy_vector).magnitude()
+
+        #vector.normalize  reduces length of vector to 1
+        #speed then can be easily multipled into it and not give strange results
+        if distance > 0:
+            direction = (player_vector - enemy_vector).normalize()
+        #if player and enemy in same position, give empty vector
+        else:
+            direction = pygame.math.Vector2()
+
+        return (distance, direction)
+
+    def get_status(self, player):
+        #invoke method to get distance to player
+        distance = self.get_player_distance_direction(player)[0]
+
+        #conditional logic to check enemy's distance from player. Change status of enemy if condition satisfied
+        if distance <= self.attack_radius:
+            self.status = 'attack'
+        elif distance <= self.notice_radius:
+            self.status = 'move'
+        else:
+            self.status = 'idle'
+
+    def actions(self, player):
+        if self.status == 'attack':
+            print('attack')
+        elif self.status == 'move':
+            pass
+        else:
+            self.direction = pygame.math.Vector2()
+
     def update(self):
         self.move(self.speed)
+
+    def enemy_update(self, player):
+        self.get_status(player)
 

@@ -136,6 +136,7 @@ class Dungeon:
         # update/draw game
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
+        self.visible_sprites.enemy_update(self.player)
         self.ui.display(self.player)
 
 #camera for game
@@ -178,3 +179,11 @@ class YSortCameraGroup(pygame.sprite.Group):
             offset_position = sprite.rect.topleft - self.offset
             #draw them on screen
             self.display_surface.blit(sprite.image, offset_position)
+
+    def enemy_update(self, player):
+        #adding update method for enemy sprites. 
+        #to get enemy sprites, we check through each sprites, make sure the attribute 'sprite_type' exists and then fill out list with the sprite_type 'enemy"
+        enemy_sprites = [sprite for sprite in self.sprites() if hasattr(sprite, 'sprite_type') and sprite.sprite_type == 'enemy']
+        #For each of these sprites, pass in player property to enemy_update in enemy.py
+        for sprite in enemy_sprites:
+            sprite.enemy_update(player)
