@@ -26,9 +26,19 @@ UI_BG_COLOR = '#333333'
 UI_BORDER_COLOR = '#DADADA'
 TEXT_COLOR = '#DADADA'
 
+#===#
+#Data
+#===#
 
 #Weapon
 dagger = {'cooldown' : 100, 'damage': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
 
 #Bow
 bow = {'damage': 2, 'cost': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/bow/right.png'}
+
+#Enemies
+enemy_data = {
+    'skoolie' : {'health': 2, 'damage': 1, 'attack_type': 'bump', 'attack_sound': 'path', 'speed': 2, 'attack_radius': 60, 'notice_radius': 360},
+    'slime' : {'health': 1, 'damage': 2, 'attack_type': 'bump', 'attack_sound': 'path', 'speed': 1, 'attack_radius': 60, 'notice_radius': 300},
+    'grelmo' : {'health': 6, 'damage': 3, 'attack_type': 'bump', 'attack_sound': 'path', 'speed': 1, 'attack_radius': 100, 'notice_radius': 400},
+}
