@@ -43,6 +43,10 @@ class Player(Entity):
         self.ammo = self.stats['ammo']
         self.speed = self.stats['speed']
 
+        #i-frame timer
+        self.vulnerable = True
+        self.hurt_time = None
+        self.invulnerability_duration = 500
 
 
 
@@ -155,12 +159,18 @@ class Player(Entity):
         #running infinite timer to compare attack/bow timers to it
         current_time = pygame.time.get_ticks()
 
+        #attack cooldown timer
         if self.attacking:
             #subtract total game time from when attack timer initiated
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.attacking = False
                 #invoke destroy_attack to remove dagger sprite
                 self.destroy_attack()
+
+        #i-frame timer 
+        if not self.vulnerable:
+            if current_time - self.hurt_time >= self.invulnerability_duration:
+                self.vulnerable = True
 
     def animate(self):
         animation = self.animations[self.status]
@@ -172,6 +182,9 @@ class Player(Entity):
         #set image
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center= self.hitbox.center)
+
+        #flicker
+
         
     def update(self):
         self.input()

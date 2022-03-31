@@ -5,7 +5,7 @@ from entity import Entity
 from misc_functions import import_folder
 
 class Enemy(Entity):
-    def __init__(self, enemy_name, position, groups, obstacle_sprites):
+    def __init__(self, enemy_name, position, groups, obstacle_sprites, damage_player):
         #general setup
         super().__init__(groups)
         self.sprite_type = 'enemy'
@@ -38,6 +38,7 @@ class Enemy(Entity):
         self.can_attack = True
         self.attack_time = None
         self.attack_cooldown = 1000
+        self.damage_player = damage_player
 
         #i-frame timer
         self.vulnerable = True
@@ -100,7 +101,8 @@ class Enemy(Entity):
             self.can_attack = False
             #start attack_timer
             self.attack_time = pygame.time.get_ticks()
-            print('attack')
+            #run damage_player method that was passed down from dungeon.py
+            self.damage_player(self.attack_damage, self.attack_type)
         elif self.status == f'{self.facing}':
             #have enemy move towards player 
             #self.direction is inherited from the move function in entity, this is where the logic of moving the sprite lives
