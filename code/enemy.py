@@ -39,6 +39,11 @@ class Enemy(Entity):
         self.attack_time = None
         self.attack_cooldown = 1000
 
+        #i-frame timer
+        self.vulnerable = True
+        self.hit_time = None
+        self.invincibility_duration = 450
+
     def import_assets(self, name):
         #defining dict of different animations states
         self.animations = {'left_idle' : [], 'right_idle' : [], 'left': [], 'right' : [], 'left_attack' : [], 'right_attack' : []}
@@ -105,19 +110,31 @@ class Enemy(Entity):
             self.direction = pygame.math.Vector2()
 
     def cooldowns(self):
+        current_time = pygame.time.get_ticks()
+        #attack cooldown
         if not self.can_attack:
-            current_time = pygame.time.get_ticks()
-
-            #attack cooldown
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.can_attack = True
 
+        #i-frame timer
+        if not self.vulnerable:
+            if current_time - self.hit_time >= self.invincibility_duration:
+                self.vulnerable = True
+
+
     def get_damage(self, player, attack_type):
-        if attack_type == 'dagger':
-            self.health -= dagger['damage']
-        else:
-            pass
-            #bow damage
+        if self.vulnerable:
+            if attack_type == 'dagger':
+                self.health -= dagger['damage']
+            else:
+                pass
+                #bow damage
+            self.hit_time = pygame.time.get_ticks()
+            self.vulnerable = False
+
+    def check_death(self):
+        if self.health <= 0:
+            self.kill()
 
     def animate(self):
         animation = self.animations[self.status]
@@ -134,6 +151,7 @@ class Enemy(Entity):
         self.move(self.speed)
         self.animate()
         self.cooldowns()
+        self.check_death()
 
     def enemy_update(self, player):
         self.get_status(player)
