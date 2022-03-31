@@ -1,8 +1,9 @@
 import pygame
+from entity import Entity
 from settings import *
 from misc_functions import import_folder
 
-class Player(pygame.sprite.Sprite):
+class Player(Entity):
     def __init__(self, position, groups, obstacle_sprites, create_attack, destroy_attack, create_arrow):
         #need to inherit from sprite class via super
         super().__init__(groups)
@@ -155,42 +156,6 @@ class Player(pygame.sprite.Sprite):
         #switch back to idle after attack
         else:
             self.status = self.status.replace('_attack', '_idle')
-
-    def move(self,speed):
-        # does the vector have length?
-        if self.direction.magnitude() != 0:
-            #if so, set to one
-            self.direction = self.direction.normalize()
-
-        #apply movement to rect and also check for collisions
-        self.hitbox.x += (self.direction.x * speed)
-        self.collision('horizontal')
-        self.hitbox.y += (self.direction.y * speed) 
-        self.collision('vertical')
-        #update rect to be hitbox subtracting from the y to adjust for strange pixel height
-        self.rect.center = (self.hitbox.center[0], self.hitbox.center[1] - 20)
-    
-    def collision(self, direction):
-        if direction == 'horizontal':
-            #check each sprite in obstacle sprite
-            for sprite in self.obstacle_sprites:
-                #if collision becomes true
-                if sprite.hitbox.colliderect(self.hitbox):
-                    #and if direction is to the right
-                    if self.direction.x > 0:
-                        #keep player sprite right side same as obstacle left side
-                        self.hitbox.right = sprite.hitbox.left
-                    if self.direction.x < 0:
-                        self.hitbox.left = sprite.hitbox.right
-
-        #the following logic is the same as horizontal except applied to y axis
-        if direction == 'vertical':
-            for sprite in self.obstacle_sprites:
-                if sprite.hitbox.colliderect(self.hitbox):
-                    if self.direction.y > 0:
-                        self.hitbox.bottom = sprite.hitbox.top
-                    if self.direction.y < 0:
-                        self.hitbox.top = sprite.hitbox.bottom
 
     def cooldowns(self):
         #running infinite timer to compare attack/bow timers to it
