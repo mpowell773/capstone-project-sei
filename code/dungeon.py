@@ -20,9 +20,11 @@ class Dungeon:
         #sprite group settings
         self.visible_sprites = YSortCameraGroup()
         self.obstacle_sprites = pygame.sprite.Group()
-
+        
         #attack sprites
         self.current_attack = None
+        self.attack_sprites = pygame.sprite.Group()
+        self.attackable_sprites = pygame.sprite.Group()
 
         #run create_map method to display sprites
         self.create_map()
@@ -83,7 +85,7 @@ class Dungeon:
                 
                         if style == 'crates':
                             crate_image = graphics['crates'][int(column)]
-                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites], 'crates', crate_image)
+                            Tile((x,y), [self.visible_sprites, self.obstacle_sprites, self.attackable_sprites], 'crates', crate_image)
 
                         if style == 'chests':
                             chest_image = graphics['chests'][int(column)]
@@ -114,11 +116,14 @@ class Dungeon:
                                 elif column == '2': enemy_name = 'slime'
                                 else: enemy_name = 'grelmo'
 
-                                Enemy(enemy_name, (x,y), [self.visible_sprites], self.obstacle_sprites)
+                                Enemy(enemy_name, 
+                                (x,y),
+                                [self.visible_sprites, self.attackable_sprites], 
+                                self.obstacle_sprites)
                                 
     def create_attack(self):
         #when invoked, create this sprite and do its actions
-        self.current_attack = Dagger(self.player, [self.visible_sprites])
+        self.current_attack = Dagger(self.player, [self.visible_sprites, self.attack_sprites])
 
     def create_arrow(self, damage, cost):
         print(damage)
