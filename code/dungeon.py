@@ -6,6 +6,7 @@ from debug import debug
 from misc_functions import import_csv_layout, import_folder
 from weapon import Dagger
 from ui import UI
+from enemy import Enemy
 
 
 
@@ -106,6 +107,10 @@ class Dungeon:
                                     self.create_attack,
                                     self.destroy_attack,
                                     self.create_arrow)
+                            else:
+                                #spawn enemy onto map
+                                Enemy('enemy', (x,y), [self.visible_sprites])
+                                
 
 
 
@@ -172,6 +177,3 @@ class YSortCameraGroup(pygame.sprite.Group):
             offset_position = sprite.rect.topleft - self.offset
             #draw them on screen
             self.display_surface.blit(sprite.image, offset_position)
-
-
-

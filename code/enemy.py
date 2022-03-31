@@ -10,4 +10,4 @@ class Enemy(Entity):
 
         #graphics
         self.image = pygame.Surface((64,64))
-        self.rectangle = self.image.get_rect(topleft = position)
+        self.rect = self.image.get_rect(topleft = position)
