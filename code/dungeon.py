@@ -41,6 +41,7 @@ class Dungeon:
             'chests': import_csv_layout('../levels/dungeon/dungeon_clean_Chests.csv'),
             'objects': import_csv_layout('../levels/dungeon/dungeon_clean_Objects.csv'),
             'doors': import_csv_layout('../levels/dungeon/dungeon_clean_Doors.csv'),
+            'entities': import_csv_layout('../levels/dungeon/dungeon_clean_Entities.csv'),
         }
 
         #dict of graphics
@@ -51,6 +52,7 @@ class Dungeon:
             'chests' : import_folder('../assets/graphics/organized_scaled_tile_set/chests'),
             'objects' : import_folder('../assets/graphics/organized_scaled_tile_set/objects'),
             'doors' : import_folder('../assets/graphics/organized_scaled_tile_set/doors'),
+            # 'entities' : import_folder('../assets/graphics/organized_scaled_tile_set/entities/spawn')
         }
 
         #for loop to cycle through our layout dict
@@ -94,14 +96,19 @@ class Dungeon:
                             door_image = graphics['doors'][int(column)]
                             Tile((x,y), [self.visible_sprites], 'doors', door_image)
 
-        #spawn player into dungeon
-        self.player = Player(
-            (1600, 2800), 
-            [self.visible_sprites], 
-            self.obstacle_sprites, 
-            self.create_attack,
-            self.destroy_attack,
-            self.create_arrow)
+                        if style == 'entities':
+                            if column == '0':
+                                #spawn player into dungeon
+                                self.player = Player(
+                                    (x, y), 
+                                    [self.visible_sprites], 
+                                    self.obstacle_sprites, 
+                                    self.create_attack,
+                                    self.destroy_attack,
+                                    self.create_arrow)
+
+
+
 
     def create_attack(self):
         #when invoked, create this sprite and do its actions
@@ -143,7 +150,7 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()
 
         #create floor
-        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_clean_floor.png').convert()
+        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor_03_31_22.png').convert()
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
 
 

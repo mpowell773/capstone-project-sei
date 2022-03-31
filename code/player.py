@@ -23,11 +23,7 @@ class Player(Entity):
         #player animation state
         self.status = 'right'
         self.direction_weapon = 'right'
-        self.frame_index = 0
-        self.animation_speed = 0.1
 
-        #movement variables
-        self.direction = pygame.math.Vector2()
         #need obstacle_sprites to check for collisions
         self.obstacle_sprites = obstacle_sprites
 

@@ -5,6 +5,12 @@ class Entity(pygame.sprite.Sprite):
         #inherit __init__ from Sprite class
         super().__init__(groups)
 
+        #animation variables
+        self.frame_index = 0
+        self.animation_speed = 0.1
+        #direction variable
+        self.direction = pygame.math.Vector2()
+
     def move(self,speed):
         # does the vector have length?
         if self.direction.magnitude() != 0:
