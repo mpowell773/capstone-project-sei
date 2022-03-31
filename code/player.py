@@ -175,8 +175,6 @@ class Player(Entity):
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center= self.hitbox.center)
         
-        
-   
     def update(self):
         self.input()
         self.cooldowns()

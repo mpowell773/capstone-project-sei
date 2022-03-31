@@ -114,7 +114,7 @@ class Dungeon:
                                 elif column == '2': enemy_name = 'slime'
                                 else: enemy_name = 'grelmo'
 
-                                Enemy(enemy_name, (x,y), [self.visible_sprites])
+                                Enemy(enemy_name, (x,y), [self.visible_sprites], self.obstacle_sprites)
                                 
     def create_attack(self):
         #when invoked, create this sprite and do its actions
