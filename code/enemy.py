@@ -124,17 +124,27 @@ class Enemy(Entity):
 
     def get_damage(self, player, attack_type):
         if self.vulnerable:
+            #update self.direction for hit_reaction
+            self.direction = self.get_player_distance_direction(player)[1]
+            #check to see if we're using our dagger
             if attack_type == 'dagger':
+                #subtract hp by dagger damage
                 self.health -= dagger['damage']
             else:
                 pass
                 #bow damage
+            #start timer and make enemy invulnerable  
             self.hit_time = pygame.time.get_ticks()
             self.vulnerable = False
 
     def check_death(self):
         if self.health <= 0:
             self.kill()
+
+    def hit_reaction(self):
+        if not self.vulnerable:
+            #enemy is pushed back in opposite direction during i-frame window
+            self.direction *= -self.resistance
 
     def animate(self):
         animation = self.animations[self.status]
@@ -148,6 +158,7 @@ class Enemy(Entity):
 
 
     def update(self):
+        self.hit_reaction()
         self.move(self.speed)
         self.animate()
         self.cooldowns()
