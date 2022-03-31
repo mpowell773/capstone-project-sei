@@ -33,6 +33,11 @@ class Enemy(Entity):
         self.notice_radius = enemy_info['notice_radius']
         self.attack_type = enemy_info['attack_type']
 
+        #player interaction
+        self.can_attack = True
+        self.attack_time = None
+        self.attack_cooldown = 1000
+
     def import_assets(self, name):
         #defining dict of different animations states
         self.animations = {'idle': [], 'move': [], 'attack': []}
@@ -65,7 +70,10 @@ class Enemy(Entity):
         distance = self.get_player_distance_direction(player)[0]
 
         #conditional logic to check enemy's distance from player. Change status of enemy if condition satisfied
-        if distance <= self.attack_radius:
+        if distance <= self.attack_radius and self.can_attack:
+            #conditional to make sure frame is at 0 when attacking
+            if self.status != 'attack':
+                self.frame_index = 0
             self.status = 'attack'
         elif distance <= self.notice_radius:
             self.status = 'move'
@@ -74,12 +82,21 @@ class Enemy(Entity):
 
     def actions(self, player):
         if self.status == 'attack':
+            self.attack_time = pygame.time.get_ticks()
+            self.can_attack = False
             print('attack')
         elif self.status == 'move':
             self.direction = self.get_player_distance_direction(player)[1]
         else:
             #insurance line to make sure direction sets to 0
             self.direction = pygame.math.Vector2()
+
+    def cooldowns(self):
+        if not self.can_attack:
+            current_time = pygame.time.get_ticks()
+
+            if current_time - self.attack_time >= self.attack_cooldown:
+                self.can_attack = True
 
     def animate(self):
         animation = self.animations[self.status]
@@ -95,6 +112,7 @@ class Enemy(Entity):
     def update(self):
         self.move(self.speed)
         self.animate()
+        self.cooldowns()
 
     def enemy_update(self, player):
         self.get_status(player)
