@@ -42,7 +42,8 @@ class Enemy(Entity):
         #i-frame timer
         self.vulnerable = True
         self.hit_time = None
-        self.invincibility_duration = 450
+        #giving iframes to enemy in relation to how long dagger lasts
+        self.invincibility_duration = dagger['cooldown']
 
     def import_assets(self, name):
         #defining dict of different animations states
@@ -155,6 +156,15 @@ class Enemy(Entity):
 
         self.image = animation[int(self.frame_index)]
         self.rect = self.image.get_rect(center = self.hitbox.center)
+
+        #flicker effect
+        if not self.vulnerable:
+            #during invulnerability, have flicker
+            #defined in entity, returns 255 or 0
+            alpha = self.wave_value()
+            self.image.set_alpha(alpha)
+        else:
+            self.image.set_alpha(255)
 
 
     def update(self):

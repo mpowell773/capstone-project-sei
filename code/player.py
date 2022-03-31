@@ -27,7 +27,7 @@ class Player(Entity):
 
         #attack variables
         self.attacking = False
-        self.attack_cooldown = 450
+        self.attack_cooldown = dagger['cooldown']
         self.attack_time = None
         self.create_attack = create_attack
         self.destroy_attack = destroy_attack
