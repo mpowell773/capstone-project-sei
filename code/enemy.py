@@ -112,6 +112,13 @@ class Enemy(Entity):
             if current_time - self.attack_time >= self.attack_cooldown:
                 self.can_attack = True
 
+    def get_damage(self, player, attack_type):
+        if attack_type == 'dagger':
+            self.health -= dagger['damage']
+        else:
+            pass
+            #bow damage
+
     def animate(self):
         animation = self.animations[self.status]
         #getting animation_speed from entity class

@@ -37,7 +37,7 @@ class Player(Entity):
         self.create_arrow = create_arrow
 
         #stats
-        self.stats = {'max_health': 6, 'ammo': 0, 'melee_attack': 1, 'range_attack': 2, 'speed': 5}
+        self.stats = {'max_health': 6, 'ammo': 0, 'speed': 5}
 
         self.health = self.stats['max_health']
         self.ammo = self.stats['ammo']

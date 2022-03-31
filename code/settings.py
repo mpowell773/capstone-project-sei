@@ -31,10 +31,10 @@ TEXT_COLOR = '#DADADA'
 #===#
 
 #Weapon
-dagger = {'cooldown' : 100, 'damage': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
+dagger = {'cooldown' : 450, 'damage': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
 
 #Bow
-bow = {'damage': 2, 'cost': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/bow/right.png'}
+bow = {'cooldown' : 200, 'damage': 2, 'cost': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/bow/right.png'}
 
 #Enemies
 enemy_data = {

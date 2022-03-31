@@ -141,13 +141,16 @@ class Dungeon:
         if self.attack_sprites:
             for attack_sprite in self.attack_sprites:
                 #if our attack sprite hits any attackable sprite, store in collision_sprites
-                collision_sprites = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, True)
+                collision_sprites = pygame.sprite.spritecollide(attack_sprite, self.attackable_sprites, False)
                 #if there are sprites in collision_sprites
                 if collision_sprites:
                     #cycle through them
                     for target_sprite in collision_sprites:
-                        #destroy
-                        target_sprite.kill()
+                        #if crates, destroy them in one hit
+                        if target_sprite.sprite_type == 'crates':
+                            target_sprite.kill()
+                        else:
+                            target_sprite.get_damage(self.player, attack_sprite.sprite_type)
 
     def run(self):
         # update/draw game

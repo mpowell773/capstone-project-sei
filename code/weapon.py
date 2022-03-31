@@ -7,6 +7,7 @@ class Dagger(pygame.sprite.Sprite):
 
         #variables
         direction = player.direction_weapon
+        self.sprite_type = 'dagger'
         
     
        #graphic of dagger
