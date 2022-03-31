@@ -1,3 +1,4 @@
+from re import X
 import pygame
 from settings import *
 from entity import Entity
@@ -12,7 +13,7 @@ class Enemy(Entity):
         #graphics and rect
         self.import_assets(enemy_name)
         #starting movement status of enemy
-        self.status = 'idle'
+        self.status = 'left'
         #inheriting frame_index from entity class
         self.image = self.animations[self.status][self.frame_index]
         self.rect = self.image.get_rect(topleft = position)
@@ -66,30 +67,39 @@ class Enemy(Entity):
         return (distance, direction)
 
     def get_status(self, player):
-        #invoke method to get distance to player
+        #invoke method to get distance and direction to player
         distance = self.get_player_distance_direction(player)[0]
+        x_direction = self.get_player_distance_direction(player)[1][0]
+        
+        #store direction in variable to prepend to other states
+        self.facing = 'left'
+
+        #conditional to check whether player is to the left or right of enemy
+        if x_direction < 0:
+            self.facing ='left'
+        else:
+            self.facing ='right'
 
         #conditional logic to check enemy's distance from player. Change status of enemy if condition satisfied
         if distance <= self.attack_radius and self.can_attack:
-            #conditional to make sure frame is at 0 cooldown is not attack
-            if self.status != 'attack':
-                self.frame_index = 0
-            self.status = 'attack'
+            self.status = f'{self.facing}_attack'
         elif distance <= self.notice_radius:
-            self.status = 'move'
+            self.status = f'{self.facing}'
         else:
-            self.status = 'idle'
+            self.status = f'{self.facing}_idle'
 
     def actions(self, player):
-        if self.status == 'attack':
+        if self.status == f'{self.facing}_attack':
             #set to false so enemy can't keep attacking
             self.can_attack = False
             #start attack_timer
             self.attack_time = pygame.time.get_ticks()
             print('attack')
-        elif self.status == 'move':
+        elif self.status == f'{self.facing}':
+            #have enemy move towards player 
+            #self.direction is inherited from the move function in entity, this is where the logic of moving the sprite lives
+            #this line is just setting the direction the enemy must go
             self.direction = self.get_player_distance_direction(player)[1]
-            print(self.direction)
         else:
             #insurance line to make sure direction sets to 0
             self.direction = pygame.math.Vector2()
