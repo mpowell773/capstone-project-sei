@@ -1,4 +1,5 @@
 import pygame
+from particles import AnimationPlayer
 from settings import *
 from tile import Tile
 from player import Player
@@ -29,8 +30,11 @@ class Dungeon:
         #run create_map method to display sprites
         self.create_map()
 
-        # user inteface
+        #user inteface
         self.ui = UI()
+
+        #particles
+        self.animation_player = AnimationPlayer()
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
@@ -150,6 +154,10 @@ class Dungeon:
                     for target_sprite in collision_sprites:
                         #if crates, destroy them in one hit
                         if target_sprite.sprite_type == 'crates':
+                            #get the center of target prite
+                            position = target_sprite.rect.center
+                            #play the smoke particle animation
+                            self.animation_player.create_smoke(position, [self.visible_sprites])
                             target_sprite.kill()
                         else:
                             target_sprite.get_damage(self.player, attack_sprite.sprite_type)
