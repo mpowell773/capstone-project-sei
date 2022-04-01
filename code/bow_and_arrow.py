@@ -3,12 +3,17 @@ from settings import *
 
 class Bow(pygame.sprite.Sprite):
     
-    def __init__(self, player, groups, attack_sprites):
+    def __init__(self, player, groups, attack_sprites, attackable_sprites, obstacle_sprites):
         super().__init__(groups)
-        #for the bow, only want left or right
+        
+        #general passed-in variables
         self.player = player
         self.sprite_groups = groups
         self.attack_sprites = attack_sprites
+        self.attackable_sprites = attackable_sprites
+        self.obstacle_sprites = obstacle_sprites
+        
+        #for the bow, only want left or right
         self.player_direction = player.status.split('_')[0]
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
@@ -46,12 +51,12 @@ class Bow(pygame.sprite.Sprite):
             arrow_direction = pygame.math.Vector2(0,-1).normalize()
         
         #spawn and move arrow
-        Arrow(self.player, arrow_direction, [self.sprite_groups, self.attack_sprites])
+        Arrow(self.player, arrow_direction, [self.sprite_groups, self.attack_sprites], self.attackable_sprites, self.obstacle_sprites)
     
    
 
 class Arrow(pygame.sprite.Sprite):
-    def __init__(self, player, arrow_direction, groups):
+    def __init__(self, player, arrow_direction, groups, attackable_sprites, obstacle_sprites):
         
         super().__init__(groups)
         self.sprite_type = 'arrow'
@@ -73,9 +78,15 @@ class Arrow(pygame.sprite.Sprite):
         else: 
             self.rect.center += self.arrow_direction * bow['speed'] 
 
+    def destroy_arrow(self):
+        #  for sprite in self.obstacle_sprites:
+        #       if sprite.rect.colliderect(self.rect):
+        #           self.kill()
+        pass
 
     def update(self):
         self.move_arrow()
+        self.destroy_arrow()
 
 
     
