@@ -8,6 +8,7 @@ from misc_functions import import_csv_layout, import_folder
 from weapon import Dagger
 from ui import UI
 from enemy import Enemy
+from bow import Bow
 
 
 
@@ -35,6 +36,7 @@ class Dungeon:
 
         #particles
         self.animation_player = AnimationPlayer()
+        self.bow = Bow(self.animation_player)
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
