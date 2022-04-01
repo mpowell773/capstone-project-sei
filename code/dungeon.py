@@ -8,7 +8,7 @@ from misc_functions import import_csv_layout, import_folder
 from weapon import Dagger
 from ui import UI
 from enemy import Enemy
-from bow import Bow
+from bow_and_arrow import Bow_and_Arrow
 
 
 
@@ -36,7 +36,6 @@ class Dungeon:
 
         #particles
         self.animation_player = AnimationPlayer()
-        self.bow = Bow(self.animation_player)
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
@@ -134,8 +133,8 @@ class Dungeon:
         self.current_attack = Dagger(self.player, [self.visible_sprites, self.attack_sprites])
 
     def create_arrow(self, damage, cost):
-        print(damage)
-        print(cost)
+        self.current_attack = Bow_and_Arrow(self.player, [self.visible_sprites])
+        print('arrow')
 
     def destroy_attack(self):
         #if variable has a data in it
