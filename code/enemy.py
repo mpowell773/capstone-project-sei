@@ -135,8 +135,7 @@ class Enemy(Entity):
                 #subtract hp by dagger damage
                 self.health -= dagger['damage']
             else:
-                pass
-                #bow damage
+                self.health -= bow['damage']
             #start timer and make enemy invulnerable  
             self.hit_time = pygame.time.get_ticks()
             self.vulnerable = False

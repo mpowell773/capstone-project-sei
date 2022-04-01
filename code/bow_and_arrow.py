@@ -3,11 +3,12 @@ from settings import *
 
 class Bow(pygame.sprite.Sprite):
     
-    def __init__(self, player, groups):
+    def __init__(self, player, groups, attack_sprites):
         super().__init__(groups)
         #for the bow, only want left or right
         self.player = player
         self.sprite_groups = groups
+        self.attack_sprites = attack_sprites
         self.player_direction = player.status.split('_')[0]
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
@@ -45,13 +46,15 @@ class Bow(pygame.sprite.Sprite):
             arrow_direction = pygame.math.Vector2(0,-1).normalize()
         
         #spawn and move arrow
-        Arrow(self.player, arrow_direction, self.sprite_groups)
+        Arrow(self.player, arrow_direction, [self.sprite_groups, self.attack_sprites])
     
    
 
 class Arrow(pygame.sprite.Sprite):
     def __init__(self, player, arrow_direction, groups):
+        
         super().__init__(groups)
+        self.sprite_type = 'arrow'
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
         self.arrow_direction = arrow_direction
@@ -63,10 +66,13 @@ class Arrow(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = player.rect.center + pygame.math.Vector2(0, 35))
 
     def move_arrow(self):
+        #using the calculations in the bow direction to adjust arrow speed
+        #this should probably be refactored to be in the arrow class in the future
         if self.arrow_direction.x:
             self.rect.center +=  self.arrow_direction * bow['speed']
         else: 
             self.rect.center += self.arrow_direction * bow['speed'] 
+
 
     def update(self):
         self.move_arrow()

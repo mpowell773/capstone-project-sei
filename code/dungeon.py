@@ -133,7 +133,7 @@ class Dungeon:
         self.current_attack = Dagger(self.player, [self.visible_sprites, self.attack_sprites])
 
     def create_arrow(self, damage, cost):
-        self.current_attack = Bow(self.player, [self.visible_sprites])
+        self.current_attack = Bow(self.player, [self.visible_sprites], self.attack_sprites)
 
 
     def destroy_attack(self):
