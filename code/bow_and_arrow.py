@@ -46,8 +46,7 @@ class Bow(pygame.sprite.Sprite):
         #spawn and move arrow
         if arrow_direction.x:
             spawned_arrow = Arrow(self.player, self.class_groups)
-            spawned_arrow.rect.center += arrow_direction * bow['speed']
-            print(spawned_arrow.rect.center)
+            spawned_arrow.rect.x += 6
         else: 
             Arrow(self.player, self.class_groups)
     

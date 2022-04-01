@@ -46,8 +46,7 @@ class ParticleEffect(pygame.sprite.Sprite):
         self.frames = animation_frames
         self.image = self.frames[self.frame_index]
         self.rect = self.image.get_rect(center = position)
-        #moving all particle effects down 20 pixels
-        
+    
 
     def animate(self):
         #quite similar to other animation functions except once the length of the animation if completed, destroy the sprite
