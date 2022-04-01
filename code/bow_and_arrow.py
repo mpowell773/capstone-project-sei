@@ -7,7 +7,7 @@ class Bow(pygame.sprite.Sprite):
         super().__init__(groups)
         #for the bow, only want left or right
         self.player = player
-        self.class_groups = groups
+        self.sprite_groups = groups
         self.player_direction = player.status.split('_')[0]
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
@@ -28,7 +28,7 @@ class Bow(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midright = (player.rect.midleft + 
             pygame.math.Vector2(25, 35)))
         
-        
+        #invoke shoot arrow whenever Bow is created
         self.shoot_arrow()
 
 
@@ -45,7 +45,7 @@ class Bow(pygame.sprite.Sprite):
             arrow_direction = pygame.math.Vector2(0,-1).normalize()
         
         #spawn and move arrow
-        Arrow(self.player, arrow_direction, self.class_groups)
+        Arrow(self.player, arrow_direction, self.sprite_groups)
     
    
 
@@ -64,9 +64,9 @@ class Arrow(pygame.sprite.Sprite):
 
     def move_arrow(self):
         if self.arrow_direction.x:
-            self.rect.x +=  5
+            self.rect.center +=  self.arrow_direction * bow['speed']
         else: 
-            self.rect.y += 5  
+            self.rect.center += self.arrow_direction * bow['speed'] 
 
     def update(self):
         self.move_arrow()
