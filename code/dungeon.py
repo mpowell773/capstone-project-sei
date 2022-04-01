@@ -179,13 +179,17 @@ class Dungeon:
                                 attack_sprite.kill()                            
                             
     def player_pickup(self):
+        #player is collector sprite
         if self.collector_sprite:
             for collector_sprite in self.collector_sprite:
-                collision_sprites = pygame.sprite.spritecollide(collector_sprite, self.pickup_sprites, True)
+                #if player collides with a pickup
+                collision_sprites = pygame.sprite.spritecollide(collector_sprite, self.pickup_sprites, False)
                 if collision_sprites:
+                    #check the pickup-type
                     for target_sprite in collision_sprites:
                         if target_sprite.sprite_type == 'arrow_bundle':
-                            target_sprite.kill()
+                            target_sprite.pickup()
+                            
             
 
 
