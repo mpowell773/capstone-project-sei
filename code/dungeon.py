@@ -8,6 +8,7 @@ from weapon import Dagger
 from ui import UI
 from enemy import Enemy
 from bow_and_arrow import Bow
+from pickup import Arrow_Bundle
 
 
 
@@ -158,12 +159,14 @@ class Dungeon:
                     for target_sprite in collision_sprites:
                         #if crates, destroy them in one hit
                         if target_sprite.sprite_type == 'crates':
-                            #get the center of target prite
+                            #get the center of target sprite
                             position = target_sprite.rect.center
                             offset = pygame.math.Vector2(0, 20)
                             #play the smoke particle animation
                             self.animation_player.create_smoke(position + offset, [self.visible_sprites])
                             target_sprite.kill()
+                            Arrow_Bundle(position + offset, [self.visible_sprites], self.player)
+
                         else:
                             #damage enemy sprite
                             target_sprite.get_damage(self.player, attack_sprite.sprite_type)
