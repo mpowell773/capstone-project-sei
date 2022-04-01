@@ -137,7 +137,6 @@ class Dungeon:
             self.player, 
             [self.visible_sprites], 
             self.attack_sprites,
-            self.attackable_sprites,
             self.obstacle_sprites)
 
 
@@ -169,6 +168,10 @@ class Dungeon:
                         else:
                             #damage enemy sprite
                             target_sprite.get_damage(self.player, attack_sprite.sprite_type)
+                            #if arrow hits enemy, destroy it
+                            if attack_sprite.sprite_type == 'arrow':
+                                attack_sprite.kill()                            
+                            
 
     def damage_player(self, amount, attack_type):
         if self.player.vulnerable:

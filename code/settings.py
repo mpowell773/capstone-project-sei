@@ -33,7 +33,7 @@ TEXT_COLOR = '#DADADA'
 #Weapons
 dagger = {'cooldown' : 300, 'damage': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
 
-bow = {'cooldown' : 500, 'damage': 2, 'cost': 1, 'speed': 10, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/bow/right.png'}
+bow = {'cooldown' : 500, 'damage': 1, 'cost': 1, 'speed': 10, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/bow/right.png'}
 
 #Enemies
 enemy_data = {

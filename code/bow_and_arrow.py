@@ -3,14 +3,13 @@ from settings import *
 
 class Bow(pygame.sprite.Sprite):
     
-    def __init__(self, player, groups, attack_sprites, attackable_sprites, obstacle_sprites):
+    def __init__(self, player, groups, attack_sprites, obstacle_sprites):
         super().__init__(groups)
         
         #general passed-in variables
         self.player = player
         self.sprite_groups = groups
         self.attack_sprites = attack_sprites
-        self.attackable_sprites = attackable_sprites
         self.obstacle_sprites = obstacle_sprites
         
         #for the bow, only want left or right
@@ -51,18 +50,21 @@ class Bow(pygame.sprite.Sprite):
             arrow_direction = pygame.math.Vector2(0,-1).normalize()
         
         #spawn and move arrow
-        Arrow(self.player, arrow_direction, [self.sprite_groups, self.attack_sprites], self.attackable_sprites, self.obstacle_sprites)
+        Arrow(self.player, arrow_direction, [self.sprite_groups, self.attack_sprites], self.obstacle_sprites)
     
    
 
 class Arrow(pygame.sprite.Sprite):
-    def __init__(self, player, arrow_direction, groups, attackable_sprites, obstacle_sprites):
+    def __init__(self, player, arrow_direction, groups, obstacle_sprites):
         
         super().__init__(groups)
         self.sprite_type = 'arrow'
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
         self.arrow_direction = arrow_direction
+
+        #general group variables used for arrow collision
+        self.obstacle_sprites = obstacle_sprites
 
         #graphic of arrow
         full_path_arrow = f'../assets/graphics/organized_scaled_tile_set/weapons/arrow/{self.weapon_facing}.png'
@@ -78,11 +80,11 @@ class Arrow(pygame.sprite.Sprite):
         else: 
             self.rect.center += self.arrow_direction * bow['speed'] 
 
-    def destroy_arrow(self):
-        #  for sprite in self.obstacle_sprites:
-        #       if sprite.rect.colliderect(self.rect):
-        #           self.kill()
-        pass
+    def destroy_arrow(self):         
+        for sprite in self.obstacle_sprites:
+            if sprite.rect.colliderect(self.rect):
+                self.kill()
+        
 
     def update(self):
         self.move_arrow()
