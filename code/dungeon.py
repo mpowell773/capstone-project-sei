@@ -8,7 +8,7 @@ from misc_functions import import_csv_layout, import_folder
 from weapon import Dagger
 from ui import UI
 from enemy import Enemy
-from bow_and_arrow import Bow_and_Arrow
+from bow_and_arrow import Bow
 
 
 
@@ -133,8 +133,8 @@ class Dungeon:
         self.current_attack = Dagger(self.player, [self.visible_sprites, self.attack_sprites])
 
     def create_arrow(self, damage, cost):
-        self.current_attack = Bow_and_Arrow(self.player, [self.visible_sprites])
-        print('arrow')
+        self.current_attack = Bow(self.player, [self.visible_sprites])
+
 
     def destroy_attack(self):
         #if variable has a data in it
@@ -181,7 +181,6 @@ class Dungeon:
     def trigger_death_particles(self, position, particle_type):
         #create method to pass down animation player to enemy.py
         self.animation_player.create_particles(particle_type, position, self.visible_sprites)
-
 
     def run(self):
         # update/draw game

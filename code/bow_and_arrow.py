@@ -1,7 +1,7 @@
 import pygame
 from settings import *
 
-class Bow_and_Arrow(pygame.sprite.Sprite):
+class Bow(pygame.sprite.Sprite):
     
     def __init__(self, player, groups):
         super().__init__(groups)
@@ -16,24 +16,21 @@ class Bow_and_Arrow(pygame.sprite.Sprite):
         #make bow smaller
         self.image = pygame.transform.rotozoom(self.image, 0, 0.75)
 
-        #graphic of arrow
-        full_path_arrow = f'../assets/graphics/organized_scaled_tile_set/weapons/arrow/{self.player_direction}.png'
-        self.arrow_image = pygame.image.load(full_path_arrow).convert_alpha()
-
         #placement of bow
-
         if  self.player_direction == 'right':
             #place weapon to from it's center left on the player's center right
             #using a vector to adjust bow's position on player sprite
             self.rect = self.image.get_rect(midleft = (player.rect.midright + pygame.math.Vector2(-25, 35)))
         elif self.player_direction == 'left':
-            self.rect = self.image.get_rect(midright = (player.rect.midleft + pygame.math.Vector2(25, 35)))
+            self.rect = self.image.get_rect(midright = (player.rect.midleft + 
+            pygame.math.Vector2(25, 35)))
+        
+        self.shoot_arrow(player, groups)
 
 
 
-    def arrow(self):
+    def shoot_arrow(self, player, groups):
         #get direction of player
-        #splitting the _idle/attack off of status
         if self.weapon_facing == 'right':
             arrow_direction = pygame.math.Vector2(1,0)
         elif self.weapon_facing == 'left':
@@ -45,5 +42,20 @@ class Bow_and_Arrow(pygame.sprite.Sprite):
         
         if arrow_direction.x:
             print('shoot horizontal')
+            Arrow(player, groups)
         else: 
             print('shoot vertical')
+
+class Arrow(pygame.sprite.Sprite):
+    def __init__(self, player, groups):
+        super().__init__(groups)
+        #for arrow, we need up, down, left, or right
+        self.weapon_facing = player.direction_weapon
+        print(self.weapon_facing)
+
+        #graphic of arrow
+        full_path_arrow = f'../assets/graphics/organized_scaled_tile_set/weapons/arrow/{self.weapon_facing}.png'
+        self.image = pygame.image.load(full_path_arrow).convert_alpha()
+        
+        self.rect = self.image.get_rect(center = player.rect.center)
+
