@@ -59,7 +59,6 @@ class Dungeon:
             'chests' : import_folder('../assets/graphics/organized_scaled_tile_set/chests'),
             'objects' : import_folder('../assets/graphics/organized_scaled_tile_set/objects'),
             'doors' : import_folder('../assets/graphics/organized_scaled_tile_set/doors'),
-            # 'entities' : import_folder('../assets/graphics/organized_scaled_tile_set/entities/spawn')
         }
 
         #for loop to cycle through our layout dict
@@ -125,7 +124,8 @@ class Dungeon:
                                     (x,y),
                                     [self.visible_sprites, self.attackable_sprites], 
                                     self.obstacle_sprites,
-                                    self.damage_player)
+                                    self.damage_player,
+                                    self.trigger_death_particles)
                                 
     def create_attack(self):
         #when invoked, create this sprite and do its actions
@@ -175,6 +175,12 @@ class Dungeon:
             #play particles depending on enemy
             offset = pygame.math.Vector2(0, 20)
             self.animation_player.create_particles(attack_type, self.player.rect.center + offset, [self.visible_sprites])
+
+
+    def trigger_death_particles(self, position, particle_type):
+        #create method to pass down animation player to enemy.py
+        self.animation_player.create_particles(particle_type, position, self.visible_sprites)
+
 
     def run(self):
         # update/draw game

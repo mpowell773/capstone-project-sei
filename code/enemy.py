@@ -5,7 +5,7 @@ from entity import Entity
 from misc_functions import import_folder
 
 class Enemy(Entity):
-    def __init__(self, enemy_name, position, groups, obstacle_sprites, damage_player):
+    def __init__(self, enemy_name, position, groups, obstacle_sprites, damage_player, trigger_death_particles):
         #general setup
         super().__init__(groups)
         self.sprite_type = 'enemy'
@@ -39,6 +39,7 @@ class Enemy(Entity):
         self.attack_time = None
         self.attack_cooldown = 1000
         self.damage_player = damage_player
+        self.trigger_death_particles = trigger_death_particles
 
         #i-frame timer
         self.vulnerable = True
@@ -142,7 +143,16 @@ class Enemy(Entity):
 
     def check_death(self):
         if self.health <= 0:
+            #destroy sprite
             self.kill()
+            #logic to check if skoolie and then move particles down if so
+            position = self.rect.center
+            if self.enemy_name == 'skoolie':
+                position = position + pygame.math.Vector2(0, 25)
+            else:
+                position = position + pygame.math.Vector2(0, 5)
+            #trigger death particle
+            self.trigger_death_particles(position, self.enemy_name)
 
     def hit_reaction(self):
         if not self.vulnerable:
