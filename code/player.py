@@ -37,10 +37,10 @@ class Player(Entity):
         self.create_arrow = create_arrow
 
         #stats
-        self.stats = {'max_health': 6, 'ammo': 0, 'speed': 5}
+        self.stats = {'max_health': 6, 'max_ammo': 15, 'speed': 5}
 
         self.health = self.stats['max_health']
-        self.ammo = self.stats['ammo']
+        self.ammo = 5
         self.speed = self.stats['speed']
 
         #i-frame timer
@@ -111,8 +111,12 @@ class Player(Entity):
                 self.attack_cooldown = bow['cooldown']
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
-                self.create_arrow(bow['damage'], bow['cost'])
-
+                #if player has more than zero arrows
+                if self.ammo > 0:
+                    self.ammo -= 1
+                    self.create_arrow()
+                    print(self.ammo)
+    
             #test for losing hp
             if keys[pygame.K_k]:
                 self.attacking = True
