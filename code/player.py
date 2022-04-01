@@ -14,8 +14,6 @@ class Player(Entity):
         #reducing rect and returning new variable so that player image can overlap with obstacles
         self.hitbox = self.rect.inflate(0, -50)
 
-
-
         #graphics setup
         self.import_player_assets()
         #player animation state
@@ -48,8 +46,6 @@ class Player(Entity):
         self.hurt_time = None
         self.invulnerability_duration = 500
 
-
-
     def import_player_assets(self):
         #path to character images
         character_path = '../assets/graphics/organized_scaled_tile_set/entities/player'
@@ -60,7 +56,6 @@ class Player(Entity):
             #importing files from our player folder into our animations dict
             self.animations[animation] = import_folder(character_path + '/' + animation)
             
-
     def input(self):
         #storing input from player in keys
         keys = pygame.key.get_pressed()
@@ -135,7 +130,6 @@ class Player(Entity):
                 else:
                     self.health += 1
            
-
     def get_status(self):
         #idle and vertical move status status
         #if player is moving
@@ -208,5 +202,9 @@ class Player(Entity):
         self.move(self.speed)
 
 
-# Harley's contribution to The Legend of Python
-# kjhyu
+
+
+# My cat Harley's contribution to The Legend of Python
+    # kjhyu
+
+    
