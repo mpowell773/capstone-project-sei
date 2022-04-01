@@ -13,6 +13,8 @@ class Bow_and_Arrow(pygame.sprite.Sprite):
        #graphic of bow
         full_path_bow = f'../assets/graphics/organized_scaled_tile_set/weapons/bow/{self.player_direction}.png'
         self.image = pygame.image.load(full_path_bow).convert_alpha()
+        #make bow smaller
+        self.image = pygame.transform.rotozoom(self.image, 0, 0.75)
 
         #graphic of arrow
         full_path_arrow = f'../assets/graphics/organized_scaled_tile_set/weapons/arrow/{self.player_direction}.png'
@@ -22,9 +24,10 @@ class Bow_and_Arrow(pygame.sprite.Sprite):
 
         if  self.player_direction == 'right':
             #place weapon to from it's center left on the player's center right
-            self.rect = self.image.get_rect(midleft = (player.rect.midright + pygame.math.Vector2(-25,0)))
+            #using a vector to adjust bow's position on player sprite
+            self.rect = self.image.get_rect(midleft = (player.rect.midright + pygame.math.Vector2(-25, 35)))
         elif self.player_direction == 'left':
-            self.rect = self.image.get_rect(midright = (player.rect.midleft + pygame.math.Vector2(20,0)))
+            self.rect = self.image.get_rect(midright = (player.rect.midleft + pygame.math.Vector2(25, 35)))
 
 
 

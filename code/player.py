@@ -97,6 +97,8 @@ class Player(Entity):
 
             #attack input
             if keys[pygame.K_z]:
+                #adjust cooldown for dagger
+                self.attack_cooldown = dagger['cooldown']
                 #set to true so no more attacks happen
                 self.attacking = True
                 #creating a timer
@@ -105,6 +107,8 @@ class Player(Entity):
 
             #bow input
             if keys[pygame.K_x]:
+                #adjust cooldown for bow
+                self.attack_cooldown = bow['cooldown']
                 self.attacking = True
                 self.attack_time = pygame.time.get_ticks()
                 self.create_arrow(bow['damage'], bow['cost'])
