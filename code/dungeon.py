@@ -28,6 +28,10 @@ class Dungeon:
         self.attack_sprites = pygame.sprite.Group()
         self.attackable_sprites = pygame.sprite.Group()
 
+        #pickup sprites
+        self.collector_sprite = pygame.sprite.Group()
+        self.pickup_sprites = pygame.sprite.Group()
+
         #run create_map method to display sprites
         self.create_map()
 
@@ -108,7 +112,7 @@ class Dungeon:
                                 #spawn player into dungeon
                                 self.player = Player(
                                     (x, y), 
-                                    [self.visible_sprites], 
+                                    [self.visible_sprites, self.collector_sprite], 
                                     self.obstacle_sprites, 
                                     self.create_attack,
                                     self.destroy_attack,
@@ -165,7 +169,7 @@ class Dungeon:
                             #play the smoke particle animation
                             self.animation_player.create_smoke(position + offset, [self.visible_sprites])
                             target_sprite.kill()
-                            Arrow_Bundle(position + offset, [self.visible_sprites], self.player)
+                            Arrow_Bundle(position + offset, [self.visible_sprites, self.pickup_sprites], self.player)
 
                         else:
                             #damage enemy sprite
@@ -174,6 +178,16 @@ class Dungeon:
                             if attack_sprite.sprite_type == 'arrow':
                                 attack_sprite.kill()                            
                             
+    def player_pickup(self):
+        if self.collector_sprite:
+            for collector_sprite in self.collector_sprite:
+                collision_sprites = pygame.sprite.spritecollide(collector_sprite, self.pickup_sprites, True)
+                if collision_sprites:
+                    for target_sprite in collision_sprites:
+                        if target_sprite.sprite_type == 'arrow_bundle':
+                            target_sprite.kill()
+            
+
 
     def damage_player(self, amount, attack_type):
         if self.player.vulnerable:
@@ -198,6 +212,7 @@ class Dungeon:
         self.visible_sprites.update()
         self.visible_sprites.enemy_update(self.player)
         self.player_attack_logic()
+        self.player_pickup()
         self.ui.display(self.player)
 
 #camera for game
