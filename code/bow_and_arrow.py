@@ -6,9 +6,12 @@ class Bow(pygame.sprite.Sprite):
     def __init__(self, player, groups):
         super().__init__(groups)
         #for the bow, only want left or right
+        self.player = player
+        self.class_groups = groups
         self.player_direction = player.status.split('_')[0]
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
+
 
        #graphic of bow
         full_path_bow = f'../assets/graphics/organized_scaled_tile_set/weapons/bow/{self.player_direction}.png'
@@ -25,26 +28,31 @@ class Bow(pygame.sprite.Sprite):
             self.rect = self.image.get_rect(midright = (player.rect.midleft + 
             pygame.math.Vector2(25, 35)))
         
-        self.shoot_arrow(player, groups)
+        
 
 
 
-    def shoot_arrow(self, player, groups):
+    def shoot_arrow(self):
         #get direction of player
         if self.weapon_facing == 'right':
-            arrow_direction = pygame.math.Vector2(1,0)
+            arrow_direction = pygame.math.Vector2(1,0).normalize()
         elif self.weapon_facing == 'left':
-            arrow_direction = pygame.math.Vector2(-1,0)
+            arrow_direction = pygame.math.Vector2(-1,0).normalize()
         elif self.weapon_facing == 'down':
-            arrow_direction = pygame.math.Vector2(0,1)
+            arrow_direction = pygame.math.Vector2(0,1).normalize()
         else:
-            arrow_direction = pygame.math.Vector2(0,-1)
+            arrow_direction = pygame.math.Vector2(0,-1).normalize()
         
+        #spawn and move arrow
         if arrow_direction.x:
-            print('shoot horizontal')
-            Arrow(player, groups)
+            spawned_arrow = Arrow(self.player, self.class_groups)
+            spawned_arrow.rect.center += arrow_direction * bow['speed']
+            print(spawned_arrow.rect.center)
         else: 
-            print('shoot vertical')
+            Arrow(self.player, self.class_groups)
+    
+    def update(self):
+        self.shoot_arrow()
 
 class Arrow(pygame.sprite.Sprite):
     def __init__(self, player, groups):
@@ -56,6 +64,7 @@ class Arrow(pygame.sprite.Sprite):
         #graphic of arrow
         full_path_arrow = f'../assets/graphics/organized_scaled_tile_set/weapons/arrow/{self.weapon_facing}.png'
         self.image = pygame.image.load(full_path_arrow).convert_alpha()
-        
-        self.rect = self.image.get_rect(center = player.rect.center)
+        self.rect = self.image.get_rect(center = player.rect.center + pygame.math.Vector2(0, 35))
+    
+
 
