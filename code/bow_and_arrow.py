@@ -34,7 +34,7 @@ class Bow(pygame.sprite.Sprite):
 
 
     def shoot_arrow(self):
-        #get direction of player
+        #get direction of player and use vector to update arrow direction
         if self.weapon_facing == 'right':
             arrow_direction = pygame.math.Vector2(1,0).normalize()
         elif self.weapon_facing == 'left':
@@ -45,28 +45,32 @@ class Bow(pygame.sprite.Sprite):
             arrow_direction = pygame.math.Vector2(0,-1).normalize()
         
         #spawn and move arrow
-        if arrow_direction.x:
-            spawned_arrow = Arrow(self.player, self.class_groups)
-            spawned_arrow.rect.x += 6
-        else: 
-            Arrow(self.player, self.class_groups)
+        Arrow(self.player, arrow_direction, self.class_groups)
     
    
 
 class Arrow(pygame.sprite.Sprite):
-    def __init__(self, player, groups):
+    def __init__(self, player, arrow_direction, groups):
         super().__init__(groups)
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
+        self.arrow_direction = arrow_direction
 
         #graphic of arrow
         full_path_arrow = f'../assets/graphics/organized_scaled_tile_set/weapons/arrow/{self.weapon_facing}.png'
         self.image = pygame.image.load(full_path_arrow).convert_alpha()
+        self.image = pygame.transform.rotozoom(self.image, 0, .75)
         self.rect = self.image.get_rect(center = player.rect.center + pygame.math.Vector2(0, 35))
-        
+
+    def move_arrow(self):
+        if self.arrow_direction.x:
+            self.rect.x +=  5
+        else: 
+            self.rect.y += 5  
 
     def update(self):
-        self.rect.x += 5
+        self.move_arrow()
+
 
     
 
