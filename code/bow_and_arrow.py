@@ -70,7 +70,10 @@ class Arrow(pygame.sprite.Sprite):
         full_path_arrow = f'../assets/graphics/organized_scaled_tile_set/weapons/arrow/{self.weapon_facing}.png'
         self.image = pygame.image.load(full_path_arrow).convert_alpha()
         self.image = pygame.transform.rotozoom(self.image, 0, .75)
-        self.rect = self.image.get_rect(center = player.rect.center + pygame.math.Vector2(0, 35))
+        self.rect = self.image.get_rect(center = player.rect.center + pygame.math.Vector2(-15, 19))
+        #reducing rect to have more accurate hitbox
+        self.rect = self.rect.inflate(-40, -40)
+     
 
     def move_arrow(self):
         #using the calculations in the bow direction to adjust arrow speed
@@ -85,7 +88,6 @@ class Arrow(pygame.sprite.Sprite):
             if sprite.rect.colliderect(self.rect):
                 self.kill()
         
-
     def update(self):
         self.move_arrow()
         self.destroy_arrow()

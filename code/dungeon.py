@@ -3,7 +3,6 @@ from particles import AnimationPlayer
 from settings import *
 from tile import Tile
 from player import Player
-from debug import debug
 from misc_functions import import_csv_layout, import_folder
 from weapon import Dagger
 from ui import UI

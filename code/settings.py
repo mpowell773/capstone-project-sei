@@ -31,14 +31,14 @@ TEXT_COLOR = '#DADADA'
 #===#
 
 #Weapons
-dagger = {'cooldown' : 300, 'damage': 1, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
+dagger = {'cooldown' : 300, 'damage': 2, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/dagger/up.png' }
 
 bow = {'cooldown' : 500, 'damage': 1, 'cost': 1, 'speed': 10, 'graphic': '../assets/graphics/organized_scaled_tile_set/weapons/bow/right.png'}
 
 #Enemies
 enemy_data = {
-    'skoolie' : {'health': 2, 'damage': 1, 'attack_type': 'slash', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360},
-    'slime' : {'health': 3, 'damage': 2, 'attack_type': 'slime_attack', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300},
-    'grelmo' : {'health': 8, 'damage': 3, 'attack_type': 'claw', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 100, 
+    'skoolie' : {'health': 4, 'damage': 1, 'attack_type': 'slash', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360},
+    'slime' : {'health': 6, 'damage': 2, 'attack_type': 'slime_attack', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300},
+    'grelmo' : {'health': 16, 'damage': 3, 'attack_type': 'claw', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 100, 
     'notice_radius': 400},
 }
