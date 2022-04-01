@@ -1,5 +1,7 @@
 ## Building a Zelda Game
 Huge huge resource for this project. Frankly, I would've been so lost without this for the base setup of the game
+
+Additionally, I used some of the particle effects from that game
 https://www.youtube.com/watch?v=QU1pPzEGrqw
 
 ## Scaling Tilesets
