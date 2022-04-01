@@ -38,8 +38,8 @@ bow = {'cooldown' : 200, 'damage': 2, 'cost': 1, 'graphic': '../assets/graphics/
 
 #Enemies
 enemy_data = {
-    'skoolie' : {'health': 2, 'damage': 1, 'attack_type': 'bump', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360},
-    'slime' : {'health': 3, 'damage': 2, 'attack_type': 'bump', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300},
-    'grelmo' : {'health': 8, 'damage': 3, 'attack_type': 'bump', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 100, 
+    'skoolie' : {'health': 2, 'damage': 1, 'attack_type': 'slash', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360},
+    'slime' : {'health': 3, 'damage': 2, 'attack_type': 'slime_attack', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300},
+    'grelmo' : {'health': 8, 'damage': 3, 'attack_type': 'claw', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 100, 
     'notice_radius': 400},
 }

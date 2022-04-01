@@ -199,3 +199,6 @@ class Player(Entity):
         self.animate()
         self.move(self.speed)
 
+
+# Harley's contribution to The Legend of Python
+# kjhyu

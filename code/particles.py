@@ -27,7 +27,11 @@ class AnimationPlayer:
         animation_frames = self.frames['crate']
         #pass these variables into Particle Effect class
         #additionally placing smoke a bit lower due to height of crate
-        ParticleEffect((position[0], position[1] + 25), animation_frames, groups)
+        ParticleEffect(position, animation_frames, groups)
+    
+    def create_particles(self, attack_type, position, groups):
+        animation_frames = self.frames[attack_type]
+        ParticleEffect(position, animation_frames, groups)
 
 
 

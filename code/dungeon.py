@@ -156,17 +156,25 @@ class Dungeon:
                         if target_sprite.sprite_type == 'crates':
                             #get the center of target prite
                             position = target_sprite.rect.center
+                            offset = pygame.math.Vector2(0, 20)
                             #play the smoke particle animation
-                            self.animation_player.create_smoke(position, [self.visible_sprites])
+                            self.animation_player.create_smoke(position + offset, [self.visible_sprites])
                             target_sprite.kill()
                         else:
+                            #damage enemy sprite
                             target_sprite.get_damage(self.player, attack_sprite.sprite_type)
 
     def damage_player(self, amount, attack_type):
         if self.player.vulnerable:
+            #lower player health
             self.player.health -= amount
+            #give player i-frames
             self.player.vulnerable = False
+            #start timer for i-frames
             self.player.hurt_time = pygame.time.get_ticks()
+            #play particles depending on enemy
+            offset = pygame.math.Vector2(0, 20)
+            self.animation_player.create_particles(attack_type, self.player.rect.center + offset, [self.visible_sprites])
 
     def run(self):
         # update/draw game
