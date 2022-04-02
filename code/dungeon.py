@@ -10,8 +10,6 @@ from enemy import Enemy
 from bow_and_arrow import Bow
 from pickup import Arrow_Bundle
 
-
-
 #class that displays sprites of current room and also handles their interactions
 class Dungeon:
     def __init__(self):
@@ -143,7 +141,6 @@ class Dungeon:
             self.attack_sprites,
             self.obstacle_sprites)
 
-
     def destroy_attack(self):
         #if variable has a data in it
         if self.current_attack:
@@ -190,9 +187,6 @@ class Dungeon:
                         if target_sprite.sprite_type == 'arrow_bundle':
                             target_sprite.pickup()
                             
-            
-
-
     def damage_player(self, amount, attack_type):
         if self.player.vulnerable:
             #lower player health
@@ -204,7 +198,6 @@ class Dungeon:
             #play particles depending on enemy
             offset = pygame.math.Vector2(0, 20)
             self.animation_player.create_particles(attack_type, self.player.rect.center + offset, [self.visible_sprites])
-
 
     def trigger_death_particles(self, position, particle_type):
         #create method to pass down animation player to enemy.py

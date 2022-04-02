@@ -16,12 +16,10 @@ class Arrow_Bundle(pygame.sprite.Sprite):
     
     def pickup(self):
         #conditionals to check ammo
-        if self.player.ammo <= 15:
+        if self.player.ammo <= self.player.stats['max_ammo']:
             self.player.ammo += 5
-        else:
-            self.player.ammo = 15
+            if self.player.ammo > self.player.stats['max_ammo']:
+                self.player.ammo = self.player.stats['max_ammo']
         #delete pickup
         self.kill()
         
-
-
