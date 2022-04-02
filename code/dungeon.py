@@ -8,7 +8,8 @@ from weapon import Dagger
 from ui import UI
 from enemy import Enemy
 from bow_and_arrow import Bow
-from pickup import Arrow_Bundle
+from pickup import Arrow_Bundle, Potion
+from random import randint
 
 #class that displays sprites of current room and also handles their interactions
 class Dungeon:
@@ -29,6 +30,7 @@ class Dungeon:
         #pickup sprites
         self.collector_sprite = pygame.sprite.Group()
         self.pickup_sprites = pygame.sprite.Group()
+        self.pickup_list = [Arrow_Bundle, Potion] 
 
         #run create_map method to display sprites
         self.create_map()
@@ -163,10 +165,13 @@ class Dungeon:
                             #get the center of target sprite
                             position = target_sprite.rect.center
                             offset = pygame.math.Vector2(0, 20)
+ 
                             #play the smoke particle animation
                             self.animation_player.create_smoke(position + offset, [self.visible_sprites])
+                            #destroy crate
                             target_sprite.kill()
-                            Arrow_Bundle(position + offset, [self.visible_sprites, self.pickup_sprites], self.player)
+                            #spawn pickup between potion or bow
+                            self.pickup_list[randint(0,1)](position + offset, [self.visible_sprites, self.pickup_sprites], self.player)
 
                         else:
                             #damage enemy sprite
@@ -186,6 +191,9 @@ class Dungeon:
                     for target_sprite in collision_sprites:
                         if target_sprite.sprite_type == 'arrow_bundle':
                             target_sprite.pickup()
+                        elif target_sprite.sprite_type == 'potion':
+                            target_sprite.pickup()
+                        
                             
     def damage_player(self, amount, attack_type):
         if self.player.vulnerable:
@@ -208,8 +216,8 @@ class Dungeon:
         self.visible_sprites.custom_draw(self.player)
         self.visible_sprites.update()
         self.visible_sprites.enemy_update(self.player)
-        self.player_attack_logic()
         self.player_pickup()
+        self.player_attack_logic()
         self.ui.display(self.player)
 
 #camera for game

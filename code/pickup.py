@@ -23,3 +23,19 @@ class Arrow_Bundle(pygame.sprite.Sprite):
         #delete pickup
         self.kill()
         
+class Potion(pygame.sprite.Sprite):
+    def __init__(self, position, groups, player):
+        super().__init__(groups)
+
+        self.sprite_type = 'potion'
+        self.player = player
+
+        #graphic of potion
+        full_path = '../assets/graphics/organized_scaled_tile_set/pickups/potion.png'
+        self.image = pygame.image.load(full_path).convert_alpha()
+        self.rect = self.image.get_rect(center = position)
+    
+    def pickup(self):
+        #delete potion
+        self.kill()
+        
