@@ -15,7 +15,16 @@ class Game:
         #initiate clock to control framerate
         self.clock = pygame.time.Clock()
 
-        self.dungeon = Dungeon()
+
+        #game-state
+        self.is_active = True
+
+
+        #main gameplay instance
+        self.dungeon = Dungeon(self.toggle_gameplay)
+
+    def toggle_gameplay(self):
+        self.is_active = not self.is_active
 
     def run(self):
         while True:
@@ -31,12 +40,15 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         self.dungeon.toggle_menu()
 
-            
-            
+            #fill screen with black so that weird rendering things don't happen with camera
             self.screen.fill('black')  
             
-            #create instance of room in main game
-            self.dungeon.run()
+            if self.is_active:
+                #create instance of room in main game
+                self.dungeon.run()
+            else:
+                pygame.quit()
+                sys.exit()
 
             #draw updated elements
             pygame.display.update()

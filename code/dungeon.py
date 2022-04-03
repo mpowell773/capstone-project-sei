@@ -14,10 +14,12 @@ from pause_menu import Pause
 
 #class that displays sprites of current room and also handles their interactions
 class Dungeon:
-    def __init__(self):
+    def __init__(self, toggle_gameplay):
 
         #get display surface
         self.display_surf = pygame.display.get_surface()
+        #main-game boolean
+        self.toggle_gameplay = toggle_gameplay
         #pausing variable
         self.game_paused = False
 
@@ -206,13 +208,18 @@ class Dungeon:
         if self.player.vulnerable:
             #lower player health
             self.player.health -= amount
-            #give player i-frames
-            self.player.vulnerable = False
-            #start timer for i-frames
-            self.player.hurt_time = pygame.time.get_ticks()
-            #play particles depending on enemy
-            offset = pygame.math.Vector2(0, 20)
-            self.animation_player.create_particles(attack_type, self.player.rect.center + offset, [self.visible_sprites])
+            #check if player reaches 0 hp
+            if self.player.health <= 0:
+                #kill gameplay
+                self.toggle_gameplay()
+            else:
+                #give player i-frames
+                self.player.vulnerable = False
+                #start timer for i-frames
+                self.player.hurt_time = pygame.time.get_ticks()
+                #play particles depending on enemy
+                offset = pygame.math.Vector2(0, 20)
+                self.animation_player.create_particles(attack_type, self.player.rect.center + offset, [self.visible_sprites])
 
     def trigger_death_particles(self, position, particle_type):
         #create method to pass down animation player to enemy.py
