@@ -193,6 +193,10 @@ class Dungeon:
                             target_sprite.pickup()
                         elif target_sprite.sprite_type == 'potion':
                             target_sprite.pickup()
+                            #trigger aura particles
+                            offset = pygame.math.Vector2(0, 20)
+                            self.animation_player.create_particles('aura', 
+                            self.player.rect.center + offset, self.visible_sprites)
                         
                             
     def damage_player(self, amount, attack_type):
@@ -254,7 +258,6 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.display_surface.blit(self.floor_surface, offset_position_floor)
 
         #for each sprite in group sort them by their y position
-        
         for sprite in sorted(self.sprites(), key = lambda sprite: sprite.rect.centery):
             #subtract offset from sprite rect
             offset_position = sprite.rect.topleft - self.offset

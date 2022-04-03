@@ -3,7 +3,6 @@ from misc_functions import import_folder
 
 class AnimationPlayer:
     def __init__(self):
-        
         #dict of all particle effects
         self.frames = {
             #attacks
@@ -20,6 +19,9 @@ class AnimationPlayer:
 
             #crates
             'crate' : import_folder('../assets/graphics/organized_scaled_tile_set/particles/smoke2'),
+
+            #health pot
+            'aura' : import_folder('../assets/graphics/organized_scaled_tile_set/particles/aura')
         }
     
     def create_smoke(self, position, groups):
@@ -32,7 +34,6 @@ class AnimationPlayer:
     def create_particles(self, animation_type, position, groups):
         animation_frames = self.frames[animation_type]
         ParticleEffect(position, animation_frames, groups)
-
 
 
 
