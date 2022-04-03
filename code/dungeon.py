@@ -10,6 +10,7 @@ from enemy import Enemy
 from bow_and_arrow import Bow
 from pickup import Arrow_Bundle, Potion
 from random import randint
+from pause_menu import Pause
 
 #class that displays sprites of current room and also handles their interactions
 class Dungeon:
@@ -17,6 +18,8 @@ class Dungeon:
 
         #get display surface
         self.display_surf = pygame.display.get_surface()
+        #pausing variable
+        self.game_paused = False
 
         #sprite group settings
         self.visible_sprites = YSortCameraGroup()
@@ -37,6 +40,7 @@ class Dungeon:
 
         #user inteface
         self.ui = UI()
+        self.pause = Pause()
 
         #particles
         self.animation_player = AnimationPlayer()
@@ -215,16 +219,25 @@ class Dungeon:
         self.animation_player.create_particles(particle_type, position, self.visible_sprites)
 
     def toggle_menu(self):
-        pass
+        self.game_paused = not self.game_paused
 
     def run(self):
+        
         # update/draw game
         self.visible_sprites.custom_draw(self.player)
-        self.visible_sprites.update()
-        self.visible_sprites.enemy_update(self.player)
-        self.player_pickup()
-        self.player_attack_logic()
         self.ui.display(self.player)
+
+        if self.game_paused:
+            #display pause menu
+            self.pause.display()
+        else:
+            #run the game
+            self.visible_sprites.update()
+            self.visible_sprites.enemy_update(self.player)
+            self.player_pickup()
+            self.player_attack_logic()
+           
+
 
 #camera for game
 class YSortCameraGroup(pygame.sprite.Group):
