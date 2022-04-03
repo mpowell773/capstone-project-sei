@@ -22,7 +22,9 @@ class Arrow_Bundle(pygame.sprite.Sprite):
                 self.player.ammo = self.player.stats['max_ammo']
         #delete pickup
         self.kill()
-        
+
+#potion pickup is essentially same code as arrow bundle
+#opportunity for refactor here       
 class Potion(pygame.sprite.Sprite):
     def __init__(self, position, groups, player):
         super().__init__(groups)
@@ -36,6 +38,10 @@ class Potion(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center = position)
     
     def pickup(self):
+        if self.player.health < self.player.stats['max_health']:
+            self.player.health += 2
+            if self.player.health > self.player.stats['max_health']:
+                self.player.health = self.player.stats['max_health']
         #delete potion
         self.kill()
         
