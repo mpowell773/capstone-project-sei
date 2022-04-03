@@ -2,6 +2,7 @@ import pygame, sys
 from settings import *
 from dungeon import Dungeon
 from death_screen import Death_Screen
+from title_screen import Title_Screen
 
 #class object to set up base game functionality such as running and exiting
 class Game:
@@ -16,17 +17,24 @@ class Game:
         #initiate clock to control framerate
         self.clock = pygame.time.Clock()
 
-
         #game-state
-        self.is_active = True
+        self.is_active = False
+        self.is_dead = False
 
         #main gameplay instance
-        self.dungeon = Dungeon(self.toggle_gameplay)
+        self.dungeon = Dungeon(self.toggle_death)
         #death screen
-        self.death_screen = Death_Screen(self.toggle_gameplay)
+        self.death_screen = Death_Screen(self.toggle_death)
+        #title screen
+        self.title_screen= Title_Screen(self.start_game)
  
-    def toggle_gameplay(self):
+    def toggle_death(self):
         self.is_active = not self.is_active
+        self.is_dead = not self.is_dead
+
+    def start_game(self):
+        self.is_active = True
+        self.is_dead = False
 
     def run(self):
         while True:
@@ -49,11 +57,13 @@ class Game:
             if self.is_active:
                 #create instance of room in main game
                 self.dungeon.run()
-            else:
+            elif not self.is_active and self.is_dead:
                 #display death screen
                 self.death_screen.run()
                 #reset dungeon
                 self.dungeon.reset_instance()
+            else:
+                self.title_screen.run()
 
             #draw updated elements
             pygame.display.update()

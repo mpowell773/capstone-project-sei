@@ -125,7 +125,6 @@ class Enemy(Entity):
             if current_time - self.hit_time >= self.invincibility_duration:
                 self.vulnerable = True
 
-
     def get_damage(self, player, attack_type):
         if self.vulnerable:
             #update self.direction for hit_reaction

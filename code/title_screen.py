@@ -1,8 +1,8 @@
 import pygame
 from settings import *
 
-class Death_Screen:
-    def __init__(self, toggle_death):
+class Title_Screen:
+    def __init__(self, start_game):
 
         #get display surface
         self.display_surface = pygame.display.get_surface()
@@ -11,19 +11,17 @@ class Death_Screen:
         self.center_width = WIDTH // 2
         self.center_height = HEIGHT // 2
 
-        #method to return to dungeon instance
-        self.toggle_death = toggle_death
+        #method to start the game
+        self.start_game = start_game
         #store font 
         self.font = pygame.font.Font(UI_FONT, UI_PAUSE_FONT_SIZE)
-
 
     def input(self):
         #store key presses in variable
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_c]:
-            self.toggle_death()
-
+            self.start_game()
 
     def draw_screen(self):
             #create upper text

@@ -14,12 +14,12 @@ from pause_menu import Pause
 
 #class that displays sprites of current room and also handles their interactions
 class Dungeon:
-    def __init__(self, toggle_gameplay):
+    def __init__(self, toggle_death):
 
         #get display surface
         self.display_surf = pygame.display.get_surface()
         #main-game boolean
-        self.toggle_gameplay = toggle_gameplay
+        self.toggle_death = toggle_death
         #pausing variable
         self.game_paused = False
 
@@ -211,7 +211,7 @@ class Dungeon:
             #check if player reaches 0 hp
             if self.player.health <= 0:
                 #kill gameplay
-                self.toggle_gameplay()
+                self.toggle_death()
 
             else:
                 #give player i-frames
@@ -239,8 +239,6 @@ class Dungeon:
         self.pickup_sprites.empty()
         #rebuild map
         self.create_map()
-
-
 
     def run(self):
         
