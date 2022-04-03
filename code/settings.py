@@ -20,6 +20,7 @@ UI_FONT = '../assets/font/Pixellettersfull-BnJ5.ttf'
 UI_FONT_SIZE = 36
 UI_PAUSE_FONT_SIZE = 46
 UI_AMMO_FONT_SIZE = 24
+TITLE_FONT_SIZE = 70
 
 ITEM_BOX_SIZE = 80
 
