@@ -58,6 +58,15 @@ class UI:
         self.display_surface.blit(self.heart_2, (HEART_STARTING_POSITION + HEART_SPACING, 10))
         self.display_surface.blit(self.heart_3, (HEART_STARTING_POSITION + (HEART_SPACING * 2), 10))
 
+    def ammo_count(self, ammo):
+        #create text surface and rect for ammo count
+        text_surface = self.font.render('Arrows: ' + str(ammo), False, TEXT_COLOR)
+        text_rectangle = text_surface.get_rect(topleft = (25, 65))
+
+        #display text for ammo count
+        self.display_surface.blit(text_surface, text_rectangle)
+
+
     def selection_box(self, left, top):
         #create and draw a rectangle to hold equipped item
         bg_rectangle = pygame.Rect(left, top, ITEM_BOX_SIZE, ITEM_BOX_SIZE )
@@ -110,6 +119,7 @@ class UI:
 
     def display(self, player):
         self.heart_bar(player.health)
+        self.ammo_count(player.ammo)
         self.bow_overlay()
         self.dagger_overlay()
 

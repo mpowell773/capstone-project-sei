@@ -17,6 +17,7 @@ HEART_EMPTY = '../assets/graphics/organized_scaled_tile_set/ui/empty.png'
 
 UI_FONT = '../assets/font/Pixellettersfull-BnJ5.ttf'
 UI_FONT_SIZE = 36
+UI_AMMO_FONT_SIZE = 24
 
 ITEM_BOX_SIZE = 80
 
