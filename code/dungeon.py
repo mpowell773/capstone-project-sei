@@ -223,11 +223,12 @@ class Dungeon:
 
     def run(self):
         
-        # update/draw game
+        #draw game
         self.visible_sprites.custom_draw(self.player)
         self.ui.display(self.player)
 
         if self.game_paused:
+            #since sprites are not updating, game doesn't progress while in pause menu
             #display pause menu
             self.pause.display()
         else:
