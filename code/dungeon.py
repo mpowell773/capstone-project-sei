@@ -197,8 +197,7 @@ class Dungeon:
                             offset = pygame.math.Vector2(0, 20)
                             self.animation_player.create_particles('aura', 
                             self.player.rect.center + offset, self.visible_sprites)
-                        
-                            
+                                                
     def damage_player(self, amount, attack_type):
         if self.player.vulnerable:
             #lower player health
@@ -214,6 +213,9 @@ class Dungeon:
     def trigger_death_particles(self, position, particle_type):
         #create method to pass down animation player to enemy.py
         self.animation_player.create_particles(particle_type, position, self.visible_sprites)
+
+    def toggle_menu(self):
+        pass
 
     def run(self):
         # update/draw game

@@ -2,9 +2,6 @@ import pygame, sys
 from settings import *
 from dungeon import Dungeon
 
-
-
-
 #class object to set up base game functionality such as running and exiting
 class Game:
     def __init__(self):
@@ -28,6 +25,12 @@ class Game:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                
+                if event.type == pygame.KEYDOWN:
+                    #pressing the escape key will open pause menu
+                    if event.key == pygame.K_ESCAPE:
+                        self.dungeon.toggle_menu()
+
             
             
             self.screen.fill('black')  
