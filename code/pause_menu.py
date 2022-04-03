@@ -9,7 +9,6 @@ class Pause:
         self.display_surface = pygame.display.get_surface()
 
         self.font = pygame.font.Font(UI_FONT, UI_PAUSE_FONT_SIZE)
-
         self.option_list = ['Resume', 'Exit']
 
         #selection system
@@ -73,7 +72,7 @@ class Pause:
             self.option_list[0],
             False,
             #hard-coded for the time being, but something to refactor if menu gets larger
-            MAX_AMMO_COLOR if self.selection_index == 0 else TEXT_COLOR)
+            HIGHLIGHTED_TEXT_COLOR if self.selection_index == 0 else TEXT_COLOR)
         resume_rectangle = resume_surface.get_rect(topright = bg_rectangle.topright + pygame.math.Vector2(-50, 15))
     
         #add exit text
@@ -81,7 +80,7 @@ class Pause:
             self.option_list[1],
             False,
             #hard-coded for the time being, but something to expand if menu gets larger
-            MAX_AMMO_COLOR if self.selection_index == 1 else TEXT_COLOR)
+            HIGHLIGHTED_TEXT_COLOR if self.selection_index == 1 else TEXT_COLOR)
         exit_rectangle = exit_surface.get_rect(topright = bg_rectangle.topright + pygame.math.Vector2(-50, 65)) 
 
         #draw text
@@ -90,7 +89,7 @@ class Pause:
 
 
     def display(self):
-
+        #invoke functions, draw pause menu
         self.input()
         self.selection_cooldown()
         self.draw_options()

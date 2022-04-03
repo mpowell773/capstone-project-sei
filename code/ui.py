@@ -63,7 +63,7 @@ class UI:
         text_surface = self.font.render(
             'Arrows: ' + str(ammo),
             False,
-            MAX_AMMO_COLOR if ammo == 15 else TEXT_COLOR)
+            HIGHLIGHTED_TEXT_COLOR if ammo == 15 else TEXT_COLOR)
         text_rectangle = text_surface.get_rect(topleft = (25, 65))
 
         #display text for ammo count
