@@ -229,6 +229,19 @@ class Dungeon:
     def toggle_menu(self):
         self.game_paused = not self.game_paused
 
+    def reset_instance(self):
+        #delete all sprites
+        self.visible_sprites.empty()
+        self.obstacle_sprites.empty()
+        self.attack_sprites.empty()
+        self.attackable_sprites.empty()
+        self.collector_sprite.empty()
+        self.pickup_sprites.empty()
+        #rebuild map
+        self.create_map()
+
+
+
     def run(self):
         
         #draw game

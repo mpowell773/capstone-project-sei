@@ -22,8 +22,7 @@ class Death_Screen:
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_c]:
-            pygame.quit()
-            sys.exit()
+            self.toggle_gameplay()
 
 
     def draw_screen(self):
@@ -37,7 +36,7 @@ class Death_Screen:
             greemie_rect = greemie_surface.get_rect(center = (self.center_width, self.center_height) + pygame.math.Vector2(-42, 0))
 
             #create instruction text
-            instruction_text = self.font.render("Press 'C' to exit out of the game.", False, TEXT_COLOR)
+            instruction_text = self.font.render("Press 'C' to try again!", False, TEXT_COLOR)
             instruction_rect = instruction_text.get_rect(center = (self.center_width, self.center_height) + pygame.math.Vector2(0, 100))
 
             #render text and images

@@ -37,7 +37,7 @@ class Player(Entity):
         #stats
         self.stats = {'max_health': 6, 'max_ammo': 15, 'speed': 5}
 
-        self.health = 1 #self.stats['max_health']
+        self.health = self.stats['max_health']
         self.ammo = 5
         self.speed = self.stats['speed']
 

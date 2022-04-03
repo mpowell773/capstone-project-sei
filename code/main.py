@@ -52,6 +52,8 @@ class Game:
             else:
                 #display death screen
                 self.death_screen.run()
+                #reset dungeon
+                self.dungeon.reset_instance()
 
             #draw updated elements
             pygame.display.update()
