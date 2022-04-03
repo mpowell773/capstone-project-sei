@@ -15,6 +15,8 @@ HEART_FULL = '../assets/graphics/organized_scaled_tile_set/ui/full.png'
 HEART_HALF = '../assets/graphics/organized_scaled_tile_set/ui/half.png'
 HEART_EMPTY = '../assets/graphics/organized_scaled_tile_set/ui/empty.png'
 
+MAX_AMMO_COLOR = '#DED07D'
+
 UI_FONT = '../assets/font/Pixellettersfull-BnJ5.ttf'
 UI_FONT_SIZE = 36
 UI_AMMO_FONT_SIZE = 24

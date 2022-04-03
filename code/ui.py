@@ -60,7 +60,10 @@ class UI:
 
     def ammo_count(self, ammo):
         #create text surface and rect for ammo count
-        text_surface = self.font.render('Arrows: ' + str(ammo), False, TEXT_COLOR)
+        text_surface = self.font.render(
+            'Arrows: ' + str(ammo),
+            False,
+            MAX_AMMO_COLOR if ammo == 15 else TEXT_COLOR)
         text_rectangle = text_surface.get_rect(topleft = (25, 65))
 
         #display text for ammo count
