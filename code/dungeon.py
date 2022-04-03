@@ -40,7 +40,7 @@ class Dungeon:
 
         #user inteface
         self.ui = UI()
-        self.pause = Pause()
+        self.pause = Pause(self.toggle_menu)
 
         #particles
         self.animation_player = AnimationPlayer()

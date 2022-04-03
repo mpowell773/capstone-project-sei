@@ -1,8 +1,9 @@
-import pygame
+import pygame, sys
 from settings import *
 
+
 class Pause:
-    def __init__(self):
+    def __init__(self, toggle_menu):
 
         #get display surface
         self.display_surface = pygame.display.get_surface()
@@ -15,6 +16,7 @@ class Pause:
         self.selection_index = 0
         self.selection_time = None
         self.can_move = True
+        self.toggle_menu = toggle_menu
 
     def input(self):
         #store key presses in variable
@@ -37,10 +39,17 @@ class Pause:
                 self.selection_time = pygame.time.get_ticks()
 
             #select option in menu
-            if keys[pygame.K_z]:
+            if keys[pygame.K_c]:
                 self.can_move = False
                 self.selection_time = pygame.time.get_ticks()
-                print(self.selection_index)
+                
+                #resume game
+                if self.selection_index == 0:
+                    self.toggle_menu()
+                #shut down game
+                else:
+                    pygame.quit()
+                    sys.exit()
 
 
     def selection_cooldown(self):
