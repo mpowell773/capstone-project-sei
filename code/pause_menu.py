@@ -7,9 +7,9 @@ class Pause:
         #get display surface
         self.display_surface = pygame.display.get_surface()
 
-        self.font = pygame.font.Font(UI_FONT, UI_FONT_SIZE)
+        self.font = pygame.font.Font(UI_FONT, UI_PAUSE_FONT_SIZE)
 
-        self.option_list = ['resume', 'exit']
+        self.option_list = ['Resume', 'Exit']
 
         #selection system
         self.selection_index = 0
@@ -44,14 +44,14 @@ class Pause:
 
 
     def selection_cooldown(self):
+        #if can_move is false, start the timer
         if not self.can_move:
             current_time = pygame.time.get_ticks()
-            if current_time - self.selection_time >= 300:
+            #set cooldown of keypress here
+            if current_time - self.selection_time >= 200:
                 self.can_move = True
-  
-            
-    def display(self):
-       
+    
+    def draw_options(self):      
         #draw pause menu background
         bg_rectangle = pygame.Rect(800, 50, 400, 550)
         #base rectangle
@@ -59,6 +59,29 @@ class Pause:
         #rectangle border
         pygame.draw.rect(self.display_surface, UI_BORDER_COLOR, bg_rectangle, 2)
 
+        #add resume text
+        resume_surface = self.font.render(
+            self.option_list[0],
+            False,
+            #hard-coded for the time being, but something to refactor if menu gets larger
+            MAX_AMMO_COLOR if self.selection_index == 0 else TEXT_COLOR)
+        resume_rectangle = resume_surface.get_rect(topright = bg_rectangle.topright + pygame.math.Vector2(-50, 15))
+    
+        #add exit text
+        exit_surface = self.font.render(
+            self.option_list[1],
+            False,
+            #hard-coded for the time being, but something to expand if menu gets larger
+            MAX_AMMO_COLOR if self.selection_index == 1 else TEXT_COLOR)
+        exit_rectangle = exit_surface.get_rect(topright = bg_rectangle.topright + pygame.math.Vector2(-50, 65)) 
+
+        #draw text
+        self.display_surface.blit(resume_surface, resume_rectangle)
+        self.display_surface.blit(exit_surface, exit_rectangle)
+
+
+    def display(self):
+
         self.input()
         self.selection_cooldown()
-
+        self.draw_options()
