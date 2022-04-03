@@ -212,6 +212,7 @@ class Dungeon:
             if self.player.health <= 0:
                 #kill gameplay
                 self.toggle_gameplay()
+
             else:
                 #give player i-frames
                 self.player.vulnerable = False
@@ -244,7 +245,8 @@ class Dungeon:
             self.visible_sprites.enemy_update(self.player)
             self.player_pickup()
             self.player_attack_logic()
-           
+
+
 
 
 #camera for game

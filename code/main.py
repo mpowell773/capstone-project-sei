@@ -20,12 +20,11 @@ class Game:
         #game-state
         self.is_active = True
 
-
         #main gameplay instance
         self.dungeon = Dungeon(self.toggle_gameplay)
         #death screen
-        self.death_screen = Death_Screen()
-
+        self.death_screen = Death_Screen(self.toggle_gameplay)
+ 
     def toggle_gameplay(self):
         self.is_active = not self.is_active
 
@@ -42,6 +41,7 @@ class Game:
                     #pressing the escape key will open pause menu
                     if event.key == pygame.K_ESCAPE:
                         self.dungeon.toggle_menu()
+        
 
             #fill screen with black so that weird rendering things don't happen with camera
             self.screen.fill('black')  
@@ -50,6 +50,7 @@ class Game:
                 #create instance of room in main game
                 self.dungeon.run()
             else:
+                #display death screen
                 self.death_screen.run()
 
             #draw updated elements
