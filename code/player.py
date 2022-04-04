@@ -19,7 +19,7 @@ class Player(Entity):
         #player animation state
         self.status = 'right'
         self.direction_weapon = 'right'
-       
+    
         #audio imports
         #sword
         self.sword_sound = pygame.mixer.Sound('../assets/audio/sword_1.wav')
@@ -194,7 +194,6 @@ class Player(Entity):
         self.get_status()
         self.animate()
         self.move(self.speed)
-
 
 
 

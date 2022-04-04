@@ -54,6 +54,13 @@ class Dungeon:
         #player death
         self.player_death_sound = pygame.mixer.Sound('../assets/audio/greemie_death.wav')
         self.player_death_sound.set_volume(.8)
+        #crate break
+        self.crate_break_sound = pygame.mixer.Sound('../assets/audio/crate_break.wav')
+        self.crate_break_sound.set_volume(.5)
+        self.arrow_pickup_sound = pygame.mixer.Sound('../assets/audio/pickup/arrow_pickup.wav')
+        self.arrow_pickup_sound.set_volume(.4)
+        self.potion_pickup_sound = pygame.mixer.Sound('../assets/audio/pickup/potion_pickup.wav')
+        self.potion_pickup_sound.set_volume(.5)
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
@@ -179,11 +186,12 @@ class Dungeon:
                             #get the center of target sprite
                             position = target_sprite.rect.center
                             offset = pygame.math.Vector2(0, 20)
- 
                             #play the smoke particle animation
                             self.animation_player.create_smoke(position + offset, [self.visible_sprites])
                             #destroy crate
                             target_sprite.kill()
+                            #play sound to destroy crate
+                            self.crate_break_sound.play()
                             #spawn pickup between potion or bow
                             self.pickup_list[randint(0,1)](position + offset, [self.visible_sprites, self.pickup_sprites], self.player)
 
@@ -205,8 +213,12 @@ class Dungeon:
                     for target_sprite in collision_sprites:
                         if target_sprite.sprite_type == 'arrow_bundle':
                             target_sprite.pickup()
+                            #play arrow sound
+                            self.arrow_pickup_sound.play()
                         elif target_sprite.sprite_type == 'potion':
                             target_sprite.pickup()
+                            #play potion sound
+                            self.potion_pickup_sound.play()
                             #trigger aura particles
                             offset = pygame.math.Vector2(0, 20)
                             self.animation_player.create_particles('aura', 
