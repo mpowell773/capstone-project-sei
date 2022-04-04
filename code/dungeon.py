@@ -47,6 +47,14 @@ class Dungeon:
         #particles
         self.animation_player = AnimationPlayer()
 
+        #audio imports
+        #player damage
+        self.player_damage_sound = pygame.mixer.Sound('../assets/audio/greemie_ow.wav')
+        self.player_damage_sound.set_volume(.4)
+        #player death
+        self.player_death_sound = pygame.mixer.Sound('../assets/audio/greemie_death.wav')
+        self.player_death_sound.set_volume(.6)
+
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
        
@@ -208,10 +216,14 @@ class Dungeon:
         if self.player.vulnerable:
             #lower player health
             self.player.health -= amount
+            if self.player.health > 0:
+                #play damage sound
+                self.player_damage_sound.play()
             #check if player reaches 0 hp
             if self.player.health <= 0:
                 #kill gameplay
                 self.toggle_death()
+                self.player_death_sound.play()
 
             else:
                 #give player i-frames
