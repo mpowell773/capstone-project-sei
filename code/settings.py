@@ -41,8 +41,8 @@ bow = {'cooldown' : 500, 'damage': 1, 'cost': 1, 'speed': 10, 'graphic': '../ass
 
 #Enemies
 enemy_data = {
-    'skoolie' : {'health': 4, 'damage': 1, 'attack_type': 'slash', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360, 'death_sound': '../assets/audio/enemies/test.wav', 'death_volume': .5},
-    'slime' : {'health': 6, 'damage': 2, 'attack_type': 'slime_attack', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300, 'death_sound': '../assets/audio/enemies/slime_death.wav', 'death_volume': .8},
+    'skoolie' : {'health': 4, 'damage': 1, 'attack_type': 'slash', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360, 'death_sound': '../assets/audio/enemies/skoolie_death.wav', 'death_volume': .5, 'attack_sound' : '../assets/audio/enemies/skoolie_attack.wav', 'attack_volume' : .4},
+    'slime' : {'health': 6, 'damage': 2, 'attack_type': 'slime_attack', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300, 'death_sound': '../assets/audio/enemies/slime_death.wav', 'death_volume': .8, 'attack_sound' : '../assets/audio/enemies/slime_attack.wav', 'attack_volume' : .6},
     'grelmo' : {'health': 16, 'damage': 3, 'attack_type': 'claw', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 100, 
-    'notice_radius': 400, 'death_sound': '../assets/audio/enemies/test.wav', 'death_volume': .5},
+    'notice_radius': 400, 'death_sound': '../assets/audio/enemies/grelmo_death.wav', 'death_volume': .5, 'attack_sound' : '../assets/audio/enemies/grelmo_attack.wav', 'attack_volume' : .4},
 }

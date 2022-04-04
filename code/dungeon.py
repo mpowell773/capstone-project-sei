@@ -53,7 +53,7 @@ class Dungeon:
         self.player_damage_sound.set_volume(.4)
         #player death
         self.player_death_sound = pygame.mixer.Sound('../assets/audio/greemie_death.wav')
-        self.player_death_sound.set_volume(.6)
+        self.player_death_sound.set_volume(.8)
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):

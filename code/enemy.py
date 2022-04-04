@@ -41,7 +41,10 @@ class Enemy(Entity):
         #death sound
         self.enemy_death_sound = pygame.mixer.Sound(enemy_info['death_sound'])
         self.enemy_death_sound.set_volume(enemy_info['death_volume'])
-
+        #attack sound
+        self.enemy_attack_sound = pygame.mixer.Sound(enemy_info['attack_sound'])
+        self.enemy_attack_sound.set_volume(enemy_info['attack_volume'])
+    
         #player interaction and attack timer
         self.can_attack = True
         self.attack_time = None
@@ -112,6 +115,8 @@ class Enemy(Entity):
             self.attack_time = pygame.time.get_ticks()
             #run damage_player method that was passed down from dungeon.py
             self.damage_player(self.attack_damage, self.attack_type)
+            #play sound for damaging player
+            self.enemy_attack_sound.play()
         elif self.status == f'{self.facing}':
             #have enemy move towards player 
             #self.direction is inherited from the move function in entity, this is where the logic of moving the sprite lives
