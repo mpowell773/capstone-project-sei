@@ -34,6 +34,14 @@ class Enemy(Entity):
         self.notice_radius = enemy_info['notice_radius']
         self.attack_type = enemy_info['attack_type']
 
+        #audio
+        #take damage
+        self.enemy_damaged_sound = pygame.mixer.Sound('../assets/audio/enemies/enemy_damage.wav')
+        self.enemy_damaged_sound.set_volume(.6)
+        #death sound
+        self.enemy_death_sound = pygame.mixer.Sound(enemy_info['death_sound'])
+        self.enemy_death_sound.set_volume(enemy_info['death_volume'])
+
         #player interaction and attack timer
         self.can_attack = True
         self.attack_time = None
@@ -138,11 +146,15 @@ class Enemy(Entity):
             #start timer and make enemy invulnerable  
             self.hit_time = pygame.time.get_ticks()
             self.vulnerable = False
+            #play sound
+            self.enemy_damaged_sound.play()
 
     def check_death(self):
         if self.health <= 0:
             #destroy sprite
             self.kill()
+            #play sound
+            self.enemy_death_sound.play()
             #logic to check if skoolie and then move particles down if so
             position = self.rect.center
             if self.enemy_name == 'skoolie':

@@ -15,7 +15,6 @@ HEART_FULL = '../assets/graphics/organized_scaled_tile_set/ui/full.png'
 HEART_HALF = '../assets/graphics/organized_scaled_tile_set/ui/half.png'
 HEART_EMPTY = '../assets/graphics/organized_scaled_tile_set/ui/empty.png'
 
-
 UI_FONT = '../assets/font/Pixellettersfull-BnJ5.ttf'
 UI_FONT_SIZE = 36
 UI_PAUSE_FONT_SIZE = 46
@@ -42,8 +41,8 @@ bow = {'cooldown' : 500, 'damage': 1, 'cost': 1, 'speed': 10, 'graphic': '../ass
 
 #Enemies
 enemy_data = {
-    'skoolie' : {'health': 4, 'damage': 1, 'attack_type': 'slash', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360},
-    'slime' : {'health': 6, 'damage': 2, 'attack_type': 'slime_attack', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300},
+    'skoolie' : {'health': 4, 'damage': 1, 'attack_type': 'slash', 'attack_sound': 'path', 'speed': 4, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 360, 'death_sound': '../assets/audio/enemies/test.wav', 'death_volume': .5},
+    'slime' : {'health': 6, 'damage': 2, 'attack_type': 'slime_attack', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 60, 'notice_radius': 300, 'death_sound': '../assets/audio/enemies/slime_death.wav', 'death_volume': .8},
     'grelmo' : {'health': 16, 'damage': 3, 'attack_type': 'claw', 'attack_sound': 'path', 'speed': 1, 'resistance': 3, 'attack_radius': 100, 
-    'notice_radius': 400},
+    'notice_radius': 400, 'death_sound': '../assets/audio/enemies/test.wav', 'death_volume': .5},
 }

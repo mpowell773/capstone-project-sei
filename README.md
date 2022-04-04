@@ -44,6 +44,14 @@ The game will boot up from there!
 - Hitboxes need updating
 - Character 'clips' into wall slightly depending position
 
+## Next Steps
+
+- Implement chest mechanics
+- Implement door and key mechanic
+- Implement switch block puzzle mechanic
+- Add additional floors to dungeon
+- Clean up code by moving assets and the such to dictionaries in settings.py
+
 ## References
 
 This game relied heavily upon the amazing tutorial by the youtuber Clear Code. If you are interested in creating a similar game like The Legend of Python or are curious about more complicated projects in pygame, I would highly recommend checking this [video](https://www.youtube.com/watch?v=QU1pPzEGrqw&t=24711s&ab_channel=ClearCode) out.
