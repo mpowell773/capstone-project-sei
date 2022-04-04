@@ -110,7 +110,6 @@ class Player(Entity):
                 if self.ammo > 0:
                     self.ammo -= 1
                     self.create_arrow()
-                    print(self.ammo)
     
             #test for losing hp
             if keys[pygame.K_k]:

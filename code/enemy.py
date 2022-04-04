@@ -34,7 +34,7 @@ class Enemy(Entity):
         self.notice_radius = enemy_info['notice_radius']
         self.attack_type = enemy_info['attack_type']
 
-        #player interaction
+        #player interaction and attack timer
         self.can_attack = True
         self.attack_time = None
         self.attack_cooldown = 1000
@@ -46,6 +46,11 @@ class Enemy(Entity):
         self.hit_time = None
         #giving iframes to enemy in relation to how long dagger lasts
         self.invincibility_duration = dagger['cooldown']
+
+        #grelmo victory screen timer
+        self.grelmo_alive = True
+        self.victory_time = None
+        self.victory_pause = 1000
 
     def import_assets(self, name):
         #defining dict of different animations states
@@ -124,6 +129,13 @@ class Enemy(Entity):
         if not self.vulnerable:
             if current_time - self.hit_time >= self.invincibility_duration:
                 self.vulnerable = True
+        
+        #victory timer
+        if not self.grelmo_alive:
+            if current_time - self.victory_time >= self.victory_pause:
+                print('poggers')
+
+        
 
     def get_damage(self, player, attack_type):
         if self.vulnerable:
@@ -151,6 +163,12 @@ class Enemy(Entity):
                 position = position + pygame.math.Vector2(0, 5)
             #trigger death particle
             self.trigger_death_particles(position, self.enemy_name)
+            
+            #logic to check if grelmo died
+            if self.enemy_name == 'grelmo':
+                self.victory_time = pygame.time.get_ticks()
+                self.grelmo_alive = False
+                print('grelmo ded')
 
     def hit_reaction(self):
         if not self.vulnerable:
