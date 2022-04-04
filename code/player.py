@@ -14,11 +14,21 @@ class Player(Entity):
         #reducing rect and returning new variable so that player image can overlap with obstacles
         self.hitbox = self.rect.inflate(-5, -50)
 
-        #graphics setup
+        #import player graphics
         self.import_player_assets()
         #player animation state
         self.status = 'right'
         self.direction_weapon = 'right'
+       
+  
+        #audio
+        #sword
+        self.sword_sound = pygame.mixer.Sound('../assets/audio/sword_1.wav')
+        self.sword_sound.set_volume(.4)
+        #bow
+        self.bow_sound = pygame.mixer.Sound('../assets/audio/bow_shot.wav')
+        self.bow_sound.set_volume(.4)
+
 
         #need obstacle_sprites to check for collisions
         self.obstacle_sprites = obstacle_sprites
@@ -98,7 +108,10 @@ class Player(Entity):
                 self.attacking = True
                 #creating a timer
                 self.attack_time = pygame.time.get_ticks()
+                #invoke create attack from dungeon.py
                 self.create_attack()
+                #play sound
+                self.sword_sound.play()
 
             #bow input
             if keys[pygame.K_x]:
@@ -110,6 +123,8 @@ class Player(Entity):
                 if self.ammo > 0:
                     self.ammo -= 1
                     self.create_arrow()
+                    #play sound
+                    self.bow_sound.play()
     
             #test for losing hp
             if keys[pygame.K_k]:

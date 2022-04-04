@@ -39,6 +39,11 @@ The game will boot up from there!
 | Confirm      | C           |
 | Open Menu    | Esc         |
 
+## Current Bugs
+
+- Hitboxes need updating
+- Character 'clips' into wall slightly depending position
+
 ## References
 
 This game relied heavily upon the amazing tutorial by the youtuber Clear Code. If you are interested in creating a similar game like The Legend of Python or are curious about more complicated projects in pygame, I would highly recommend checking this [video](https://www.youtube.com/watch?v=QU1pPzEGrqw&t=24711s&ab_channel=ClearCode) out.
