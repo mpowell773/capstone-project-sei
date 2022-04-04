@@ -47,11 +47,6 @@ class Enemy(Entity):
         #giving iframes to enemy in relation to how long dagger lasts
         self.invincibility_duration = dagger['cooldown']
 
-        #grelmo victory screen timer
-        self.grelmo_alive = True
-        self.victory_time = None
-        self.victory_pause = 1000
-
     def import_assets(self, name):
         #defining dict of different animations states
         self.animations = {'left_idle' : [], 'right_idle' : [], 'left': [], 'right' : [], 'left_attack' : [], 'right_attack' : []}
@@ -130,13 +125,6 @@ class Enemy(Entity):
             if current_time - self.hit_time >= self.invincibility_duration:
                 self.vulnerable = True
         
-        #victory timer
-        if not self.grelmo_alive:
-            if current_time - self.victory_time >= self.victory_pause:
-                print('poggers')
-
-        
-
     def get_damage(self, player, attack_type):
         if self.vulnerable:
             #update self.direction for hit_reaction
@@ -164,12 +152,6 @@ class Enemy(Entity):
             #trigger death particle
             self.trigger_death_particles(position, self.enemy_name)
             
-            #logic to check if grelmo died
-            if self.enemy_name == 'grelmo':
-                self.victory_time = pygame.time.get_ticks()
-                self.grelmo_alive = False
-                print('grelmo ded')
-
     def hit_reaction(self):
         if not self.vulnerable:
             #enemy is pushed back in opposite direction during i-frame window
