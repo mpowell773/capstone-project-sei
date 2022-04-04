@@ -2,8 +2,8 @@ import pygame
 from settings import *
 
 class Bow(pygame.sprite.Sprite):
-    
-    def __init__(self, player, groups, attack_sprites, obstacle_sprites):
+  
+    def __init__(self, player, groups, attack_sprites, obstacle_sprites): 
         super().__init__(groups)
         
         #general passed-in variables
@@ -16,7 +16,6 @@ class Bow(pygame.sprite.Sprite):
         self.player_direction = player.status.split('_')[0]
         #for arrow, we need up, down, left, or right
         self.weapon_facing = player.direction_weapon
-
 
        #graphic of bow
         full_path_bow = f'../assets/graphics/organized_scaled_tile_set/weapons/bow/{self.player_direction}.png'
@@ -35,8 +34,6 @@ class Bow(pygame.sprite.Sprite):
         
         #invoke shoot arrow whenever Bow is created
         self.shoot_arrow()
-
-
 
     def shoot_arrow(self):
         #get direction of player and use vector to update arrow direction
@@ -74,7 +71,6 @@ class Arrow(pygame.sprite.Sprite):
         #reducing rect to have more accurate hitbox
         self.rect = self.rect.inflate(-40, -40)
      
-
     def move_arrow(self):
         #using the calculations in the bow direction to adjust arrow speed
         #this should probably be refactored to be in the arrow class in the future

@@ -9,7 +9,6 @@ class Dagger(pygame.sprite.Sprite):
         direction = player.direction_weapon
         self.sprite_type = 'dagger'
         
-    
        #graphic of dagger
         full_path = f'../assets/graphics/organized_scaled_tile_set/weapons/dagger/{direction}.png'
         self.image = pygame.image.load(full_path).convert_alpha()

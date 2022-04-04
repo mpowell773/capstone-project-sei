@@ -9,7 +9,7 @@ class Pause:
         self.display_surface = pygame.display.get_surface()
 
         self.font = pygame.font.Font(UI_FONT, UI_PAUSE_FONT_SIZE)
-        self.option_list = ['Resume', 'Exit']
+        self.option_list = ['Resume', 'Exit Game']
 
         #selection system
         self.selection_index = 0
@@ -20,7 +20,6 @@ class Pause:
     def input(self):
         #store key presses in variable
         keys = pygame.key.get_pressed()
-
 
         #move up or down in menu
         if self.can_move:
@@ -49,7 +48,6 @@ class Pause:
                 else:
                     pygame.quit()
                     sys.exit()
-
 
     def selection_cooldown(self):
         #if can_move is false, start the timer
@@ -86,7 +84,6 @@ class Pause:
         #draw text
         self.display_surface.blit(resume_surface, resume_rectangle)
         self.display_surface.blit(exit_surface, exit_rectangle)
-
 
     def display(self):
         #invoke functions, draw pause menu

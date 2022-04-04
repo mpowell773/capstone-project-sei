@@ -2,6 +2,7 @@ import pygame
 from settings import *
 
 class Death_Screen:
+   
     def __init__(self, toggle_death):
 
         #get display surface
@@ -16,14 +17,12 @@ class Death_Screen:
         #store font 
         self.font = pygame.font.Font(UI_FONT, UI_PAUSE_FONT_SIZE)
 
-
     def input(self):
         #store key presses in variable
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_c]:
             self.toggle_death()
-
 
     def draw_screen(self):
             #create upper text

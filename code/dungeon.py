@@ -57,12 +57,16 @@ class Dungeon:
         #crate break
         self.crate_break_sound = pygame.mixer.Sound('../assets/audio/crate_break.wav')
         self.crate_break_sound.set_volume(.5)
+        #arrow pickup
         self.arrow_pickup_sound = pygame.mixer.Sound('../assets/audio/pickup/arrow_pickup.wav')
         self.arrow_pickup_sound.set_volume(.4)
+        #potion pickup
         self.potion_pickup_sound = pygame.mixer.Sound('../assets/audio/pickup/potion_pickup.wav')
         self.potion_pickup_sound.set_volume(.5)
+        #dungeon ambience
+        self.dungeon_ambience = dungeon_ambience
 
-        dungeon_ambience.play(loops = -1)
+        self.dungeon_ambience.play()
 
 
     #method to loop through maps in settings.py to display sprites 
@@ -92,7 +96,7 @@ class Dungeon:
 
         #for loop to cycle through our layout dict
         for style, layout in layout.items():
-            # enumerating to get both row and index
+            #enumerating to get both row and index
             for row_index, row in enumerate(layout):
                 #enumerating individual row to get column and element within row
                 for column_index, column in enumerate(row):
@@ -155,7 +159,7 @@ class Dungeon:
                                     self.obstacle_sprites,
                                     self.damage_player,
                                     self.trigger_death_particles)
-                                
+                                        
     def create_attack(self):
         #when invoked, create this sprite and do its actions
         self.current_attack = Dagger(self.player, [self.visible_sprites, self.attack_sprites])
@@ -266,6 +270,8 @@ class Dungeon:
         self.pickup_sprites.empty()
         #rebuild map
         self.create_map()
+        #restart dungeon_ambience every time dungeon is restarted
+        self.dungeon_ambience.play(loops = -1)
 
     def run(self):
         
@@ -305,9 +311,8 @@ class YSortCameraGroup(pygame.sprite.Group):
         self.offset = pygame.math.Vector2()
 
         #create floor
-        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor_03_31_22.png').convert()
+        self.floor_surface = pygame.image.load('../assets/graphics/exported_images/dungeon_floor_04_04_22.png').convert()
         self.floor_rect = self.floor_surface.get_rect(topleft = (0,0))
-
 
     #adds false depth effect
     def custom_draw(self, player):

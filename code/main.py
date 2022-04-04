@@ -8,6 +8,9 @@ from title_screen import Title_Screen
 class Game:
     def __init__(self):
 
+        #initialize pygame mixer
+        pygame.mixer.init()
+        #initializes pygame
         pygame.init()
         #screen changes size of game window (scaling due to tileset size)
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -23,12 +26,21 @@ class Game:
 
         #audio
         #dungeon ambience
-        self.dungeon_ambience = pygame.mixer.Sound('../assets/audio/dungeon_ambience_simplified.wav')
+        self.dungeon_ambience = pygame.mixer.Sound('../assets/audio/ambience_music/dungeon_ambience.wav')
         self.dungeon_ambience.set_volume(.1)
         #intro music
-        self.intro_music = pygame.mixer.Sound('../assets/audio/intro_music_trimmed.wav')
+        self.intro_music = pygame.mixer.Sound('../assets/audio/ambience_music/intro_music_trimmed.wav')
         self.intro_music.set_volume(.5)
+        #death hit
+        self.death_hit = pygame.mixer.Sound('../assets/audio/ambience_music/death_hit_trimmed.wav')
+        self.death_hit.set_volume(.5)   
+        self.death_hit_has_played = False    
 
+        #intro music loops until player starts game
+        #loop is pretty questionable quality-wise
+        #something to look at in the future
+        self.intro_music.play(loops = -1)
+                
         #main gameplay instance
         self.dungeon = Dungeon(self.toggle_death, self.dungeon_ambience)
         #death screen
@@ -58,25 +70,29 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         self.dungeon.toggle_menu()
         
-
             #fill screen with black so that weird rendering things don't happen with camera
             self.screen.fill('black')  
             
             if self.is_active:
-                #create instance of room in main game
+                #fade out music
                 self.intro_music.fadeout(100)
+                self.death_hit.fadeout(100)
+                self.death_hit_has_played = False  
+                #create instance of room in main game
                 self.dungeon.run()        
             elif not self.is_active and self.is_dead:
                 #display death screen
                 self.death_screen.run()
+                self.dungeon_ambience.fadeout(100)
+                #conditional logic to prevent infinite plays 
+                if not self.death_hit_has_played:
+                    self.death_hit.play()
+                    self.death_hit_has_played = True
                 #reset dungeon
                 self.dungeon.reset_instance()
             else:
                 self.title_screen.run()
-                #intro music loops until player starts game
-                #loop is pretty questionable quality-wise
-                #something to look at in the future
-                self.intro_music.play(loops = -1)
+       
 
             #draw updated elements
             pygame.display.update()

@@ -75,7 +75,7 @@ class UI:
         bg_rectangle = pygame.Rect(left, top, ITEM_BOX_SIZE, ITEM_BOX_SIZE )
         #base rectangle
         pygame.draw.rect(self.display_surface, UI_BG_COLOR, bg_rectangle)
-       #rectangle border
+        #rectangle border
         pygame.draw.rect(self.display_surface, UI_BORDER_COLOR, bg_rectangle, 2)
         
         return bg_rectangle
@@ -84,7 +84,7 @@ class UI:
         #return of selection_box gives the rectangle
         bg_rectangle = self.selection_box(15, 625)  
        
-       #dagger image import 
+        #dagger image import 
         dagger_surface = pygame.image.load(dagger['graphic']).convert_alpha()
         #create dagger_rectangle and use bg_rectangle as reference
         dagger_rectangle = dagger_surface.get_rect(center = bg_rectangle.center)
@@ -118,8 +118,7 @@ class UI:
         #render dagger and text
         self.display_surface.blit(bow_surface, bow_rectangle)
         self.display_surface.blit(text_surface, text_rectangle)
-        
-
+    
     def display(self, player):
         self.heart_bar(player.health)
         self.ammo_count(player.ammo)
