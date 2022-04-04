@@ -14,7 +14,7 @@ from pause_menu import Pause
 
 #class that displays sprites of current room and also handles their interactions
 class Dungeon:
-    def __init__(self, toggle_death):
+    def __init__(self, toggle_death, dungeon_ambience):
 
         #get display surface
         self.display_surf = pygame.display.get_surface()
@@ -61,6 +61,9 @@ class Dungeon:
         self.arrow_pickup_sound.set_volume(.4)
         self.potion_pickup_sound = pygame.mixer.Sound('../assets/audio/pickup/potion_pickup.wav')
         self.potion_pickup_sound.set_volume(.5)
+
+        dungeon_ambience.play(loops = -1)
+
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):

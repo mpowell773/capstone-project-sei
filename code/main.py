@@ -21,13 +21,21 @@ class Game:
         self.is_active = False
         self.is_dead = False
 
+        #audio
+        #dungeon ambience
+        self.dungeon_ambience = pygame.mixer.Sound('../assets/audio/dungeon_ambience_simplified.wav')
+        self.dungeon_ambience.set_volume(.1)
+        #intro music
+        self.intro_music = pygame.mixer.Sound('../assets/audio/intro_music_trimmed.wav')
+        self.intro_music.set_volume(.5)
+
         #main gameplay instance
-        self.dungeon = Dungeon(self.toggle_death)
+        self.dungeon = Dungeon(self.toggle_death, self.dungeon_ambience)
         #death screen
         self.death_screen = Death_Screen(self.toggle_death)
         #title screen
         self.title_screen= Title_Screen(self.start_game)
- 
+
     def toggle_death(self):
         self.is_active = not self.is_active
         self.is_dead = not self.is_dead
@@ -56,7 +64,8 @@ class Game:
             
             if self.is_active:
                 #create instance of room in main game
-                self.dungeon.run()
+                self.intro_music.fadeout(100)
+                self.dungeon.run()        
             elif not self.is_active and self.is_dead:
                 #display death screen
                 self.death_screen.run()
@@ -64,6 +73,10 @@ class Game:
                 self.dungeon.reset_instance()
             else:
                 self.title_screen.run()
+                #intro music loops until player starts game
+                #loop is pretty questionable quality-wise
+                #something to look at in the future
+                self.intro_music.play(loops = -1)
 
             #draw updated elements
             pygame.display.update()
