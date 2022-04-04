@@ -33,7 +33,7 @@ class Game:
         self.intro_music.set_volume(.5)
         #death hit
         self.death_hit = pygame.mixer.Sound('../assets/audio/ambience_music/death_hit_trimmed.wav')
-        self.death_hit.set_volume(.5)   
+        self.death_hit.set_volume(.3)   
         self.death_hit_has_played = False    
 
         #intro music loops until player starts game
