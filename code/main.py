@@ -14,7 +14,6 @@ class Game:
         pygame.init()
         #screen changes size of game window (scaling due to tileset size)
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-        # self.native_screen = NATIVE_SCREEN
         #changes name of window
         pygame.display.set_caption('The Legend of Python')
         #hide mouse cursor

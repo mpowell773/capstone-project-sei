@@ -65,9 +65,9 @@ class Dungeon:
         self.potion_pickup_sound.set_volume(.5)
         #dungeon ambience
         self.dungeon_ambience = dungeon_ambience
-
-        self.dungeon_ambience.play()
-
+        #call ambience on init to begin ambience
+        #this is where bug is with title screen music
+        self.dungeon_ambience.play(loops = -1)
 
     #method to loop through maps in settings.py to display sprites 
     def create_map(self):
