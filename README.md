@@ -18,7 +18,7 @@ python3 -m pip install -U pygame --user
 
 This will install pygame.
 
-At this point, you should have all the dependencies necessary to play the game! Clone down the repo (or feel free to fork it and mess with the code!) and within the code directory, run:
+At this point, you should have all the dependencies necessary to play the game! Clone down the repo (or feel free to fork it and mess with the code!) and within the ```code directory```, run:
 
 ```
 python3 main.py
@@ -43,6 +43,7 @@ The game will boot up from there!
 
 - Hitboxes need updating
 - Character 'clips' into wall slightly depending position
+- Ambience starts playing in title screen
 
 ## Next Steps
 
@@ -51,6 +52,7 @@ The game will boot up from there!
 - Implement switch block puzzle mechanic
 - Add additional floors to dungeon
 - Clean up code by moving assets and the such to dictionaries in settings.py
+- Balance weapons and enemy hp
 
 ## References
 
